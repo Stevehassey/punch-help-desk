@@ -226,6 +226,38 @@
     border-color: rgba(255,255,255,0.4);
   }
 
+  .search-fallback{
+    display: none;
+    margin-top: 16px;
+    max-width: 640px;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(230,130,47,0.55);
+    border-radius: 16px;
+    padding: 16px 20px;
+    backdrop-filter: blur(2px);
+  }
+  .search-fallback.visible{ display: block; }
+  .search-fallback p{
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.9);
+  }
+  .search-fallback .btn-strategist{
+    display: inline-block;
+    background: var(--ribbon);
+    color: #1a1200;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 10px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .search-fallback .btn-strategist:hover{
+    background: #fff;
+    transform: translateY(-1px);
+  }
+
   .chip{
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -314,6 +346,11 @@
       </button>
     </form>
 
+    <div class="search-fallback" id="search-fallback">
+      <p>That's beyond the scope of the Help Desk. Want to reach out to a strategist?</p>
+      <a class="btn-strategist" id="search-fallback-link" href="contact.html">Yes — connect me →</a>
+    </div>
+
     <nav class="chips anim" aria-label="Primary actions">
       <a class="chip" href="checklist.html">Launch Checklist</a>
       <a class="chip" href="contact.html">Talk To A Strategist</a>
@@ -332,6 +369,73 @@
     </nav>
   </div>
 </section>
+
+<script>
+(function(){
+  var PAGES = [
+    { file: 'fundamentals.html', keywords: ['cpm','cpc','cpa','cpv','cpcv','vcpm','impression','impressions','reach','frequency','ctr','click-through','cvr','conversion rate','viewability','vcr','completion rate','engagement rate','share of voice','sov','first-party data','third-party data','contextual targeting','behavioral targeting','geofencing','lookalike','retargeting','remarketing','frequency cap','funnel','awareness','consideration','brand lift','incrementality','attribution','a/b test','ab test','creative rotation','fatigue','fundamentals','basics','glossary','terms','metrics'] },
+    { file: 'programmatic.html', keywords: ['dsp','ssp','programmatic','rtb','real-time bidding','header bidding','ad exchange','exchange','pmp','private marketplace','deal id','guaranteed','brand safety','brand suitability','mrc','viewability standard','fraud','ivt','invalid traffic','pixel','tag','floor price','trade desk','dv360','amazon dsp'] },
+    { file: 'ctv.html', keywords: ['ctv','connected tv','ott','linear tv','addressable','acr','household','streaming','hulu','peacock','roku','apple tv','vod','video on demand','smart tv'] },
+    { file: 'youtube.html', keywords: ['youtube','trueview','skippable','bumper','in-stream','content targeting','audience targeting'] },
+    { file: 'social.html', keywords: ['meta','facebook','instagram','tiktok','linkedin','pinterest','snap','twitter','verified','verification','business manager','conversions api','boosted post','custom audience','advantage+','smart+','political ad','social'] },
+    { file: 'search.html', keywords: ['google ads','bing','microsoft ads','search ads','search engine','sem','keyword','quality score','match type','performance max','pmax','smart bidding','serp','ad rank','negative keyword'] },
+    { file: 'measurement.html', keywords: ['report','reporting','wow','week over week','mom','month over month','yoy','year over year','pacing','benchmark','attribution window','data lag','brand lift study','incrementality test','optimization'] },
+    { file: 'privacy.html', keywords: ['privacy','cookie','cookieless','idfa','att','app tracking transparency','consent management','cmp','gdpr','ccpa'] },
+    { file: 'checklist.html', keywords: ['launch','checklist','go live','pre-launch','ready to launch','launching'] }
+  ];
+
+  function normalize(s){ return s.toLowerCase().trim(); }
+  function wordsOf(s){ return normalize(s).split(/[^a-z0-9+]+/).filter(Boolean); }
+
+  function scorePage(query, page){
+    var q = normalize(query);
+    var qWords = wordsOf(query);
+    var score = 0;
+    page.keywords.forEach(function(kw){
+      var k = normalize(kw);
+      if(k.indexOf(' ') !== -1){
+        if(q.indexOf(k) !== -1) score += 2;
+      } else if(qWords.indexOf(k) !== -1){
+        score += 1;
+      } else if(qWords.some(function(w){ return w.length > 3 && (w.indexOf(k) === 0 || k.indexOf(w) === 0); })){
+        score += 1;
+      }
+    });
+    return score;
+  }
+
+  function findBestPage(query){
+    var best = null, bestScore = 0;
+    PAGES.forEach(function(page){
+      var s = scorePage(query, page);
+      if(s > bestScore){ bestScore = s; best = page; }
+    });
+    return bestScore > 0 ? best : null;
+  }
+
+  var form = document.querySelector('.search-form');
+  var input = document.getElementById('help-search');
+  var fallback = document.getElementById('search-fallback');
+  var strategistLink = document.getElementById('search-fallback-link');
+
+  input.addEventListener('input', function(){
+    fallback.classList.remove('visible');
+  });
+
+  form.addEventListener('submit', function(e){
+    var query = input.value.trim();
+    if(!query) return; // empty search just falls through to the wiki hub
+    e.preventDefault();
+    var match = findBestPage(query);
+    if(match){
+      window.location.href = match.file;
+    } else {
+      strategistLink.href = 'contact.html?q=' + encodeURIComponent(query);
+      fallback.classList.add('visible');
+    }
+  });
+})();
+</script>
 
 </body>
 </html>

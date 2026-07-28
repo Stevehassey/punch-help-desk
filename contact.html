@@ -94,5 +94,18 @@
   <p class="note">Note for implementation: this form doesn't submit anywhere yet — it needs to be wired up to a real inbox, CRM, or lead-routing tool (and the email address above is a placeholder). Swap in the real destination before this goes live.</p>
 </main>
 
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var q = params.get('q');
+  if(q){
+    var ta = document.getElementById('message');
+    if(ta && !ta.value){
+      ta.value = 'I searched the Help Desk for: "' + q + '" — could someone follow up?';
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
