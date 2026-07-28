@@ -208,6 +208,24 @@
     margin-top: clamp(18px, 3vw, 26px);
   }
 
+  .chips-label{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    margin: 22px 0 10px 2px;
+  }
+
+  .chip--secondary{
+    font-size: clamp(0.76rem, 1.3vw, 0.87rem);
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.02);
+    border-color: rgba(255,255,255,0.4);
+  }
+
   .chip{
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -247,6 +265,7 @@
   .powered-by.anim{ animation-delay: 0.34s; }
   .search-form.anim{ animation-delay: 0.44s; }
   .chips.anim{ animation-delay: 0.54s; }
+  .chips-label.anim{ animation-delay: 0.5s; }
 
   @keyframes rise{
     to{ opacity: 1; transform: translateY(0); }
@@ -295,11 +314,21 @@
       </button>
     </form>
 
-    <nav class="chips anim" aria-label="Popular topics">
+    <nav class="chips anim" aria-label="Primary actions">
       <a class="chip" href="checklist.html">Launch Checklist</a>
       <a class="chip" href="contact.html">Talk To A Strategist</a>
-      <a class="chip" href="wiki.html#meta-verification">Meta Verification Guide</a>
-      <a class="chip" href="ideas.html">Cool Digital Ideas</a>
+    </nav>
+
+    <p class="chips-label anim">Or browse the wiki</p>
+    <nav class="chips anim" aria-label="Wiki sections">
+      <a class="chip chip--secondary" href="wiki.html#fundamentals">Ad Basics</a>
+      <a class="chip chip--secondary" href="wiki.html#programmatic">Programmatic &amp; DSPs</a>
+      <a class="chip chip--secondary" href="wiki.html#ctv">CTV</a>
+      <a class="chip chip--secondary" href="wiki.html#youtube">YouTube</a>
+      <a class="chip chip--secondary" href="wiki.html#social">Social</a>
+      <a class="chip chip--secondary" href="wiki.html#search">Search</a>
+      <a class="chip chip--secondary" href="wiki.html#measurement">Reports &amp; Metrics</a>
+      <a class="chip chip--secondary" href="wiki.html#privacy">Privacy Basics</a>
     </nav>
   </div>
 </section>
