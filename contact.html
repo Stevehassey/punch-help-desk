@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk To A Strategist — The Help Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .form-grid{ display: grid; gap: 16px; max-width: 480px; margin-top: 28px; }
+  .field label{ display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; }
+  .field input, .field textarea{
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 1.5px solid var(--rule);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .field textarea{ resize: vertical; min-height: 96px; }
+  .field input:focus, .field textarea:focus{
+    outline: none;
+    border-color: var(--orange-bright);
+    box-shadow: 0 0 0 3px rgba(230,130,47,0.18);
+  }
+  .submit-btn{
+    justify-self: start;
+    background: var(--orange-bright);
+    color: #1a1200;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 999px;
+    padding: 13px 28px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .submit-btn:hover{ transform: translateY(-1px); background: #d6741f; }
+  .or-line{ margin: 26px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .note{
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <div class="brand__ribbon">
+      <div class="brand__ribbon-layer brand__ribbon-layer--back"></div>
+      <div class="brand__ribbon-layer brand__ribbon-layer--front">
+        <span class="brand__ribbon-text">PUNCH</span>
+      </div>
+    </div>
+    <span class="brand__word">Help Desk</span>
+  </a>
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="wiki.html">Wiki</a>
+  </nav>
+</header>
+
+<main class="page">
+  <p class="section__label">Talk To A Strategist</p>
+  <h1 class="page-title">A media plan starts with a conversation, not a search bar.</h1>
+  <p class="page-lede">Strategy, budget calls, and anything specific to your account go beyond what the Help Desk is built for — that's exactly what your Punch team handles. Tell us a bit about what you're working on, and we'll get the right person looped in.</p>
+
+  <form class="form-grid" onsubmit="return false;">
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" type="text" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="message">What are you working on?</label>
+      <textarea id="message" placeholder="A few sentences is plenty — goals, timing, whatever's useful."></textarea>
+    </div>
+    <button class="submit-btn" type="submit">Get connected</button>
+  </form>
+
+  <p class="or-line">Prefer email? Reach us directly at <a href="mailto:hello@punch.help">hello@punch.help</a>.</p>
+
+  <p class="note">Note for implementation: this form doesn't submit anywhere yet — it needs to be wired up to a real inbox, CRM, or lead-routing tool (and the email address above is a placeholder). Swap in the real destination before this goes live.</p>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Help Desk — Powered by Punch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0908;
+    --ribbon: #e6822f;
+    --ribbon-dark: #b85e22;
+    --cream: #f6e2b8;
+    --white: #ffffff;
+    --muted: rgba(255,255,255,0.74);
+    --ring: rgba(230,130,47,0.55);
+    --radius-pill: 999px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero__bg{
+    position: absolute;
+    inset: 0;
+    background-image: url('images/librarian-hero.jpg');
+    background-size: cover;
+    background-position: 60% 30%;
+    filter: saturate(0.92) contrast(1.03);
+  }
+
+  .hero__scrim{
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 900px 620px at 20% 92%, rgba(4,4,4,0.82) 0%, rgba(4,4,4,0.5) 42%, rgba(4,4,4,0) 74%),
+      linear-gradient(0deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.08) 32%, rgba(3,3,3,0) 55%, rgba(3,3,3,0.18) 100%);
+  }
+
+  /* Ribbon badge — layered banner shape, recreated as a signature element */
+  .ribbon-wrap{
+    position: absolute;
+    top: clamp(20px, 4vw, 44px);
+    left: clamp(20px, 4vw, 44px);
+    z-index: 5;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
+  }
+
+  .ribbon{
+    position: relative;
+    width: clamp(150px, 18vw, 230px);
+    height: clamp(58px, 6.5vw, 84px);
+  }
+
+  .ribbon__layer{
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(6% 0%, 100% 0%, 88% 50%, 100% 100%, 6% 100%, 20% 50%);
+  }
+
+  .ribbon__layer--back{
+    background: var(--ribbon-dark);
+    transform: translate(6px, 7px);
+    opacity: 0.9;
+  }
+
+  .ribbon__layer--front{
+    background: var(--ribbon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ribbon__text{
+    font-family: 'Anton', sans-serif;
+    color: var(--cream);
+    font-size: clamp(1.05rem, 2vw, 1.6rem);
+    letter-spacing: 0.03em;
+    padding-left: 6%;
+    line-height: 1;
+  }
+
+  .hero__content{
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 64px) clamp(20px, 5vw, 56px) clamp(48px, 7vw, 80px);
+  }
+
+  .eyebrow{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.85rem, 1.6vw, 1.15rem);
+    letter-spacing: 0.16em;
+    color: var(--white);
+    opacity: 0.88;
+    margin: 0 0 4px 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  }
+
+  .headline{
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    line-height: 0.92;
+    font-size: clamp(3rem, 10vw, 7rem);
+    margin: 0;
+    letter-spacing: 0.005em;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .rule{
+    width: clamp(90px, 12vw, 160px);
+    height: 5px;
+    background: var(--ribbon);
+    margin: 18px 2px 12px;
+    border-radius: 3px;
+  }
+
+  .powered-by{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    letter-spacing: 0.18em;
+    color: var(--ribbon);
+    margin: 0 0 clamp(28px, 5vw, 44px) 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+  }
+
+  .search-form{
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border-radius: var(--radius-pill);
+    max-width: 640px;
+    padding: 6px 6px 6px 26px;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.35);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .search-form:focus-within{
+    box-shadow: 0 0 0 4px var(--ring), 0 14px 34px rgba(0,0,0,0.35);
+  }
+
+  .search-form input{
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    color: #2a2a2a;
+    background: transparent;
+    padding: 12px 8px;
+  }
+
+  .search-form input::placeholder{
+    color: #8a8a8a;
+  }
+
+  .search-form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #2a2a2a;
+    flex-shrink: 0;
+  }
+
+  .search-form button:hover{
+    background: rgba(0,0,0,0.06);
+  }
+
+  .search-form button svg{
+    width: 20px;
+    height: 20px;
+  }
+
+  .chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: clamp(18px, 3vw, 26px);
+  }
+
+  .chip{
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1.4vw, 0.92rem);
+    color: var(--white);
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.55);
+    border-radius: var(--radius-pill);
+    padding: 12px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .chip:hover{
+    background: var(--ribbon);
+    border-color: var(--ribbon);
+    color: #1a1200;
+    transform: translateY(-1px);
+  }
+
+  .chip:focus-visible, .search-form input:focus-visible, .search-form button:focus-visible{
+    outline: 3px solid var(--ribbon);
+    outline-offset: 2px;
+  }
+
+  /* Entrance motion — subtle, staggered, single pass */
+  .anim{
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 0.7s ease forwards;
+  }
+  .ribbon-wrap.anim{ animation-delay: 0.05s; }
+  .eyebrow.anim{ animation-delay: 0.15s; }
+  .headline.anim{ animation-delay: 0.22s; }
+  .powered-by.anim{ animation-delay: 0.34s; }
+  .search-form.anim{ animation-delay: 0.44s; }
+  .chips.anim{ animation-delay: 0.54s; }
+
+  @keyframes rise{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .anim{ animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  @media (max-width: 560px){
+    .hero{ align-items: flex-end; }
+    .search-form{ max-width: 100%; }
+    .chip{ flex: 1 1 calc(50% - 6px); text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero__bg" role="img" aria-label="A librarian sitting at her library desk, surrounded by books"></div>
+  <div class="hero__scrim"></div>
+
+  <div class="ribbon-wrap anim">
+    <div class="ribbon">
+      <div class="ribbon__layer ribbon__layer--back"></div>
+      <div class="ribbon__layer ribbon__layer--front">
+        <span class="ribbon__text">PUNCH</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__content">
+    <p class="eyebrow anim">THE</p>
+    <h1 class="headline anim">HELP DESK</h1>
+    <div class="rule"></div>
+    <p class="powered-by anim">POWERED BY PUNCH</p>
+
+    <form class="search-form anim" role="search" onsubmit="return false;">
+      <label for="help-search" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Ask the Help Desk anything</label>
+      <input id="help-search" type="text" placeholder="Ask the Help Desk anything…" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </form>
+
+    <nav class="chips anim" aria-label="Popular topics">
+      <a class="chip" href="checklist.html">Launch Checklist</a>
+      <a class="chip" href="contact.html">Talk To A Strategist</a>
+      <a class="chip" href="wiki.html#meta-verification">Meta Verification Guide</a>
+      <a class="chip" href="ideas.html">Cool Digital Ideas</a>
+    </nav>
+  </div>
+</section>
+
+</body>
+</html>

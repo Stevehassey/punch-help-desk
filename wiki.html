@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Help Desk — Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <div class="brand__ribbon">
+      <div class="brand__ribbon-layer brand__ribbon-layer--back"></div>
+      <div class="brand__ribbon-layer brand__ribbon-layer--front">
+        <span class="brand__ribbon-text">PUNCH</span>
+      </div>
+    </div>
+    <span class="brand__word">Help Desk</span>
+  </a>
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="contact.html">Talk To A Strategist</a>
+  </nav>
+</header>
+
+<main class="page">
+  <p class="section__label">The Wiki</p>
+  <h1 class="page-title">Definitions, how-tos & explainers</h1>
+  <p class="page-lede">Everything below is a first draft — plain-language answers to the terms and tasks that come up most. If a question needs strategic judgment instead of a definition, that's what your Punch contact is for.</p>
+
+  <ul class="toc">
+    <li><a href="#fundamentals">Fundamentals</a></li>
+    <li><a href="#programmatic">Programmatic &amp; DSPs</a></li>
+    <li><a href="#ctv">CTV</a></li>
+    <li><a href="#youtube">YouTube</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#search">Search</a></li>
+    <li><a href="#measurement">Measurement &amp; Reports</a></li>
+    <li><a href="#privacy">Privacy Basics</a></li>
+  </ul>
+
+  <!-- 1. FUNDAMENTALS -->
+  <section class="section" id="fundamentals">
+    <p class="section__label">01</p>
+    <h2 class="section__title">Advertising Fundamentals</h2>
+    <p class="section__intro">The words that show up in almost every conversation, every report, every deck. Start here.</p>
+
+    <p class="subhead">Buying Models</p>
+    <p class="entry"><span class="entry__term">CPM (Cost Per Mille)</span> — What you pay per 1,000 impressions, full stop — click or no click, action or no action. It's how most display, video, and CTV inventory gets priced, and it's a measure of reach, not results.</p>
+    <p class="entry"><span class="entry__term">CPC (Cost Per Click)</span> — You pay when someone clicks. Nothing more, nothing less. The standard model in search, where the click is the whole point.</p>
+    <p class="entry"><span class="entry__term">CPA (Cost Per Acquisition)</span> — What each conversion costs you — a sale, a lead, a sign-up — calculated after the fact (spend ÷ conversions). Usually the number a campaign lives or dies by.</p>
+    <p class="entry"><span class="entry__term">CPV (Cost Per View)</span> — What you pay per video view, mainly on YouTube and other video platforms. "View" is the platform's call — often 30 seconds watched, or a click, whichever hits first.</p>
+    <p class="entry"><span class="entry__term">CPCV (Cost Per Completed View)</span> — Same idea as CPV, but you only pay for full watches. Common in CTV and premium video buys.</p>
+    <p class="entry"><span class="entry__term">vCPM (Viewable CPM)</span> — A CPM that only counts impressions that actually had a chance to be seen, not every impression served.</p>
+    <p class="entry"><span class="entry__term">Flat-Rate / Fixed Placement</span> — One price, one placement (a homepage takeover, say), no matter how many impressions or clicks it drives.</p>
+    <p class="entry"><span class="entry__term">PMP (Private Marketplace)</span> — An invite-only auction. A publisher opens up inventory to a select group of advertisers at a negotiated rate, instead of the open market.</p>
+    <p class="entry"><span class="entry__term">Programmatic Guaranteed</span> — Price and volume locked in ahead of time, like a traditional direct buy — just delivered through a programmatic pipe instead of an insertion order.</p>
+
+    <p class="subhead">Core Metrics</p>
+    <p class="entry"><span class="entry__term">Impressions</span> — How many times an ad was served. Not seen, not noticed — served. That distinction matters.</p>
+    <p class="entry"><span class="entry__term">Reach</span> — How many unique people, devices, or households saw the ad at least once.</p>
+    <p class="entry"><span class="entry__term">Frequency</span> — On average, how many times each of those people saw it. Reach × Frequency ≈ total impressions.</p>
+    <p class="entry"><span class="entry__term">CTR (Click-Through Rate)</span> — Clicks ÷ impressions. A rough gauge of how compelling an ad is — though "rough" is doing some work here, since it means different things on search vs. display.</p>
+    <p class="entry"><span class="entry__term">CVR (Conversion Rate)</span> — Conversions ÷ clicks (sometimes impressions). Tells you how well the traffic that shows up actually converts.</p>
+    <p class="entry"><span class="entry__term">Viewability</span> — Whether an ad had the technical shot at being seen. Industry standard (MRC): 50% of pixels in view for 1+ second, 2+ seconds for video.</p>
+    <p class="entry"><span class="entry__term">VCR (Video Completion Rate)</span> — The share of people who watched the whole thing.</p>
+    <p class="entry"><span class="entry__term">Engagement Rate</span> — Likes, comments, shares — divided by impressions or reach. The social-specific measure of "did anyone actually react."</p>
+    <p class="entry"><span class="entry__term">Share of Voice (SOV)</span> — Your slice of total impressions or spend in a category, relative to competitors.</p>
+
+    <p class="subhead">Targeting Concepts</p>
+    <p class="entry"><span class="entry__term">First-Party Data</span> — Data you own — your customers, your site visitors, your CRM.</p>
+    <p class="entry"><span class="entry__term">Third-Party Data</span> — Data someone else collected and you license. Getting harder to come by as privacy rules tighten.</p>
+    <p class="entry"><span class="entry__term">Contextual Targeting</span> — Targeting the page, not the person. Cooking ads on a recipe site — content decides placement, not who's reading.</p>
+    <p class="entry"><span class="entry__term">Behavioral Targeting</span> — Targeting the person, not the page — based on past actions or inferred interests.</p>
+    <p class="entry"><span class="entry__term">Geofencing</span> — Targeting inside a drawn boundary, often a tight radius around a physical location.</p>
+    <p class="entry"><span class="entry__term">Lookalike / Similar Audiences</span> — A new audience built to resemble one you already have — like your past customers, but bigger.</p>
+    <p class="entry"><span class="entry__term">Retargeting / Remarketing</span> — Showing ads to people who already showed you interest — visited the site, added to cart, didn't finish.</p>
+    <p class="entry"><span class="entry__term">Frequency Capping</span> — A ceiling on how many times one person sees the same ad in a given window, so it doesn't wear out its welcome.</p>
+
+    <p class="subhead">Funnel &amp; Strategy Language</p>
+    <p class="entry"><span class="entry__term">Upper / Mid / Lower Funnel</span> — Where a tactic sits in the journey: upper builds awareness, mid builds consideration, lower drives the conversion.</p>
+    <p class="entry"><span class="entry__term">Awareness / Consideration / Conversion</span> — The three stages most media plans are built around, in order.</p>
+    <p class="entry"><span class="entry__term">Brand Lift</span> — The measurable bump in awareness, favorability, or intent a campaign actually caused — usually tracked via survey.</p>
+    <p class="entry"><span class="entry__term">Incrementality</span> — The results that only happened because of the campaign — not the ones that would've happened anyway.</p>
+    <p class="entry"><span class="entry__term">Attribution</span> — How credit for a conversion gets assigned. Last-click hands it all to the final touchpoint; multi-touch spreads it across the path.</p>
+    <p class="entry"><span class="entry__term">A/B Testing</span> — Two versions, one variable, head to head — creative, audience, landing page — to see which one wins.</p>
+    <p class="entry"><span class="entry__term">Creative Rotation / Fatigue</span> — Cycling creative so the same audience doesn't see the same ad so often it stops working.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 2. PROGRAMMATIC -->
+  <section class="section" id="programmatic">
+    <p class="section__label">02</p>
+    <h2 class="section__title">Programmatic &amp; DSPs</h2>
+    <p class="section__intro">The machinery behind most digital buying. Useful to understand the shape of it, even if the buttons aren't yours to push.</p>
+
+    <p class="entry"><span class="entry__term">DSP (Demand-Side Platform)</span> — The software agencies use to buy inventory across many publishers at once, usually through automated, real-time bidding.</p>
+    <p class="entry"><span class="entry__term">SSP (Supply-Side Platform)</span> — The publisher's side of the same coin — lets publishers put inventory up for programmatic sale.</p>
+    <p class="entry"><span class="entry__term">Ad Exchange</span> — The marketplace where DSPs and SSPs actually transact. The auction house.</p>
+    <p class="entry"><span class="entry__term">RTB (Real-Time Bidding)</span> — The auction that happens in the milliseconds it takes a page to load.</p>
+    <p class="entry"><span class="entry__term">Header Bidding</span> — Lets publishers shop an impression to multiple exchanges at once before their ad server picks a winner — generally drives the price up in the publisher's favor.</p>
+    <p class="entry"><span class="entry__term">Deal ID</span> — The identifier that ties a specific buyer to a specific negotiated inventory package in a PMP deal.</p>
+    <p class="entry"><span class="entry__term">Open Exchange vs. PMP vs. Programmatic Guaranteed</span> — Three tiers, rising in control and price: open exchange (anyone can bid), PMP (invite-only), programmatic guaranteed (locked in advance).</p>
+    <p class="entry"><span class="entry__term">Brand Safety vs. Brand Suitability</span> — Safety keeps ads away from clearly harmful content. Suitability goes further — matching content to what actually fits a brand, which takes judgment, not a rulebook. <span class="entry__flag">If a client's suitability needs aren't obvious, that's a Punch-contact conversation, not a guess.</span></p>
+    <p class="entry"><span class="entry__term">Viewability Standards (MRC)</span> — The Media Rating Council's industry benchmark for what counts as a viewable impression.</p>
+    <p class="entry"><span class="entry__term">Ad Fraud / IVT (Invalid Traffic)</span> — Bots, click farms, non-human traffic — anything inflating numbers without a real person behind them.</p>
+    <p class="entry"><span class="entry__term">Pixel / Tag</span> — Code on a site that tracks visitor behavior — for measurement, retargeting, or conversions.</p>
+    <p class="entry"><span class="entry__term">Floor Price</span> — The lowest a publisher will take for an impression, full stop.</p>
+
+    <p class="subhead">How-To</p>
+    <div class="entry" id="what-is-a-dsp"><span class="entry__term">What is a DSP, and how does buying through one actually work?</span> — An agency builds a campaign in a DSP — targeting, budget, creative — and the DSP bids on eligible impressions across publishers as pages load, in real time. Which DSP, and how to target it: that's strategy. This is just the mechanism.</div>
+    <div class="entry" id="dsp-landscape"><span class="entry__term">DSP landscape overview</span> — A quick, plain-language look at a few major players (The Trade Desk, DV360, Amazon DSP) and broadly what each tends to get used for. Picking one for your account is a Punch-contact conversation.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 3. CTV -->
+  <section class="section" id="ctv">
+    <p class="section__label">03</p>
+    <h2 class="section__title">CTV (Connected TV)</h2>
+    <p class="section__intro">TV, but with the targeting and reporting of digital — mostly.</p>
+
+    <p class="entry"><span class="entry__term">CTV vs. OTT vs. Linear TV</span> — Linear is scheduled broadcast/cable. OTT is anything streamed over the internet. CTV is OTT watched on an actual TV screen — smart TV, Roku, Apple TV, console — not a phone or laptop.</p>
+    <p class="entry"><span class="entry__term">Addressable TV</span> — Different households, same broadcast, different ads — targeted using household-level data. TV's version of digital targeting.</p>
+    <p class="entry"><span class="entry__term">ACR (Automatic Content Recognition) Data</span> — Data smart TVs collect on what's playing, used to measure and target CTV.</p>
+    <p class="entry"><span class="entry__term">Household-Level vs. Device-Level Targeting</span> — CTV usually targets the household (one TV, many viewers), not the device — which changes both how precisely you can target and how you measure it.</p>
+    <p class="entry"><span class="entry__term">VOD (Video on Demand)</span> — Watch it whenever, not on a schedule.</p>
+    <p class="entry"><span class="entry__term">Live vs. On-Demand Inventory</span> — Live programming (sports, events) and on-demand content are priced and sold differently in CTV.</p>
+    <p class="entry"><span class="entry__term">Publisher-Direct vs. Programmatic CTV</span> — Buy directly from a streaming publisher, or buy programmatically alongside everything else. Both are options.</p>
+
+    <p class="subhead">How-To</p>
+    <div class="entry" id="ctv-vs-linear"><span class="entry__term">Why is CTV buying different from traditional TV buying?</span> — CTV brings TV's reach and creative together with digital's targeting and reporting — but it also inherits some real TV headaches, like managing frequency across apps and devices, and measurement that's still catching up to what digital's used to.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 4. YOUTUBE -->
+  <section class="section" id="youtube">
+    <p class="section__label">04</p>
+    <h2 class="section__title">YouTube / Online Video</h2>
+
+    <p class="entry"><span class="entry__term">TrueView</span> — YouTube's original skippable in-stream format. You pay only if someone watches long enough or interacts.</p>
+    <p class="entry"><span class="entry__term">Skippable vs. Non-Skippable Ads</span> — Skippable: skip after 5 seconds, advertiser pays only if they don't. Non-skippable: full watch required, typically sold on CPM.</p>
+    <p class="entry"><span class="entry__term">Bumper Ads</span> — Six seconds, no skip button, built for reach — not for saying much.</p>
+    <p class="entry"><span class="entry__term">Content Targeting vs. Audience Targeting</span> — Content targeting picks the video; audience targeting picks the viewer, regardless of what they're watching.</p>
+
+    <p class="subhead">How-To</p>
+    <div class="entry" id="youtube-formats"><span class="entry__term">Overview of YouTube ad formats</span> — A quick rundown of the main formats — skippable in-stream, non-skippable in-stream, bumper, in-feed. Which one fits your campaign is a Punch-contact conversation.</div>
+    <div class="entry" id="youtube-brand-safety"><span class="entry__term">YouTube brand safety controls, explained</span> — What YouTube's built-in safety settings (content exclusions, inventory types) actually do, at a glance.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 5. SOCIAL -->
+  <section class="section" id="social">
+    <p class="section__label">05</p>
+    <h2 class="section__title">Social</h2>
+    <p class="section__intro">Meta, TikTok, LinkedIn, Pinterest, Snap, X — different platforms, similar bones. Once you know one account structure, the rest are variations.</p>
+
+    <p class="entry"><span class="entry__term">Account Structure</span> — Meta runs Campaign → Ad Set → Ad. Google and TikTok generally run Campaign → Ad Group → Ad. Budget and targeting usually sit in the middle layer, creative at the bottom.</p>
+    <p class="entry"><span class="entry__term">Pixel / Conversions API</span> — The Pixel tracks visitor actions from the browser side; the Conversions API sends the same kind of data server-side — increasingly the more reliable route as browser tracking gets less dependable.</p>
+    <p class="entry"><span class="entry__term">Custom Audience vs. Lookalike Audience</span> — A custom audience is built from your own data — customer list, site visitors. A lookalike is a new audience the platform builds to resemble it.</p>
+    <p class="entry"><span class="entry__term">Boosted Post vs. Paid Ad</span> — Boosting promotes an existing post with a few simplified settings. A proper paid ad is built with full targeting, placement, and bidding control. Easier vs. precise.</p>
+    <p class="entry"><span class="entry__term">Algorithm-Driven Optimization (e.g., Advantage+, Smart+)</span> — Hand more of the setup — targeting, placement, sometimes creative combinations — to the algorithm. Less manual control, often more efficiency.</p>
+    <p class="entry"><span class="entry__term">Basic Creative Specs</span> — Aspect ratio, file size, video length, text limits — every platform has its own rules, and they shift. Confirm current specs before you finalize creative; don't rely on memory.</p>
+
+    <p class="subhead">How-To</p>
+    <div class="entry" id="meta-verification"><span class="entry__term">How to get verified on Meta</span> — Verification (Business Manager or Page) runs through Meta Business Suite: legal business name, address, phone number, and supporting documentation — a business license or utility bill — then Meta reviews it. <span class="entry__flag">If verification stalls or the requirements look off, that's a Punch-contact conversation, not a guessing game.</span></div>
+    <div class="entry" id="meta-business-manager"><span class="entry__term">How to set up a Meta Business Manager</span> — Create the account at business.facebook.com, add your Page(s) and ad account(s), assign team access. Everything else — verification, Pixel, ad accounts — sits on top of this.</div>
+    <div class="entry" id="meta-pixel"><span class="entry__term">How to install the Meta Pixel / Conversions API</span> — Conceptually: the Pixel is code in a site's header (often via a tag manager) that fires on key events; the Conversions API is its server-side counterpart, set up through Business Manager's Events Manager. The actual implementation is technical and site-specific — bring in your dev team and your Punch contact rather than DIY-ing it from a wiki page.</div>
+    <div class="entry" id="tiktok-business-center"><span class="entry__term">How to set up a TikTok Business Center</span> — Same idea as Meta Business Manager — one hub for ad accounts, assets, and team permissions, set up through TikTok's Business Center portal.</div>
+    <div class="entry" id="linkedin-campaign-manager"><span class="entry__term">How to set up LinkedIn Campaign Manager access</span> — Requires a LinkedIn Page, with account access assigned to team members inside Campaign Manager.</div>
+    <p class="entry"><span class="entry__term">Political / issue ad advertiser authorization</span> — <span class="entry__flag">This one has requirements that vary by situation — check in with your Punch contact before you move forward.</span></p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 6. SEARCH -->
+  <section class="section" id="search">
+    <p class="section__label">06</p>
+    <h2 class="section__title">Search</h2>
+
+    <p class="entry"><span class="entry__term">Account Structure (Campaign → Ad Group → Keyword)</span> — Campaigns hold the budget and goal, ad groups hold the theme, keywords and ads sit inside each group.</p>
+    <p class="entry"><span class="entry__term">Quality Score</span> — Google's 1–10 read on ad relevance, expected CTR, and landing page experience. It moves your rank and your cost.</p>
+    <p class="entry"><span class="entry__term">Match Types</span> — Broad match casts the widest net, loosely. Phrase match needs the core meaning intact. Exact match wants a close variant of the exact term. Wider net, less precision — every time.</p>
+    <p class="entry"><span class="entry__term">Search Network vs. Display Network</span> — Search shows up when someone searches for it. Display shows up on partner sites/apps based on targeting, not a query.</p>
+    <p class="entry"><span class="entry__term">Performance Max (PMax)</span> — One campaign, all of Google's inventory — Search, Display, YouTube, Gmail, Maps — run by automation, with less manual control than traditional campaign types.</p>
+    <p class="entry"><span class="entry__term">Smart Bidding</span> — Google's machine-learning bid strategies (Target CPA, Target ROAS), setting bids in real time based on conversion likelihood.</p>
+    <p class="entry"><span class="entry__term">SERP (Search Engine Results Page)</span> — The page you land on after a search — organic results and ads, side by side.</p>
+    <p class="entry"><span class="entry__term">Ad Rank</span> — The formula that decides an ad's position, or whether it shows at all — bid, Quality Score, and expected format impact combined.</p>
+    <p class="entry"><span class="entry__term">Negative Keywords</span> — Terms you explicitly block from triggering your ads, to keep irrelevant traffic out.</p>
+
+    <p class="subhead">How-To</p>
+    <div class="entry" id="google-ads-structure"><span class="entry__term">Google Ads account structure, explained</span> — Walks through campaign → ad group → keyword, and why tighter keyword grouping tends to help Quality Score and performance.</div>
+    <div class="entry" id="conversion-tracking"><span class="entry__term">Conversion tracking, conceptually</span> — What it is, at a glance: tagging a "success" action so the platform can measure and optimize toward it. Setup is technical and site-specific — bring in Punch and a dev resource for the real implementation.</div>
+    <div class="entry" id="google-vs-bing"><span class="entry__term">Google Ads vs. Microsoft/Bing Ads — key differences</span> — Similar mechanics, different audience — Bing skews older with a different device mix, generally lower competition and CPCs, and a few feature gaps versus Google.</div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 7. MEASUREMENT -->
+  <section class="section" id="measurement">
+    <p class="section__label">07</p>
+    <h2 class="section__title">Measurement &amp; Report Literacy</h2>
+    <p class="section__intro">The section that answers "what does this number in my report actually mean." Probably the one people use most.</p>
+
+    <p class="entry"><span class="entry__term">Spend vs. Delivery/Pacing</span> — Spend is money out the door so far. Pacing is whether that spend is on track, ahead, or behind the plan.</p>
+    <p class="entry"><span class="entry__term">WoW / MoM / YoY</span> — Week-over-week, month-over-month, year-over-year. Shorthand for comparing a metric to its prior period.</p>
+    <p class="entry"><span class="entry__term">Benchmark vs. Index</span> — A benchmark is the reference point (industry average CTR, say). An index shows performance relative to it — 120 index means 20% above benchmark.</p>
+    <p class="entry"><span class="entry__term">Data Lag &amp; Attribution Windows</span> — Numbers aren't final the moment they post — conversions can get credited for days after a click or view. That's why very recent data can still move.</p>
+    <p class="entry"><span class="entry__term">Viewability Rate (in a report)</span> — The share of served impressions that met the viewability bar. A quality signal, not a performance metric on its own.</p>
+    <p class="entry"><span class="entry__term">Brand Lift Study</span> — A survey-based study (often run through the platform itself) measuring whether a campaign actually moved awareness or favorability.</p>
+    <p class="entry"><span class="entry__term">Incrementality Test</span> — Isolates what the campaign actually caused, versus what would've happened anyway — usually via a holdout group.</p>
+    <p class="entry"><span class="entry__term">"Optimization" (as a report note)</span> — A deliberate adjustment — targeting, budget, bids, creative — made in response to performance data. Normal, ongoing, not a red flag.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 8. PRIVACY -->
+  <section class="section" id="privacy">
+    <p class="section__label">08</p>
+    <h2 class="section__title">Privacy &amp; Data Basics</h2>
+    <p class="section__intro">Concepts only — jurisdiction-specific rules are a Punch-contact-or-legal conversation, not a wiki answer.</p>
+
+    <p class="entry"><span class="entry__term">Cookies &amp; the Cookieless Shift</span> — Small browser files, historically used (among other things) for cross-site ad tracking. Third-party cookies have been steadily phased out, pushing the industry toward first-party data and other methods.</p>
+    <p class="entry"><span class="entry__term">IDFA / Apple ATT (App Tracking Transparency)</span> — Apple's rule requiring explicit permission before an app tracks activity across other apps or sites. IDFA is the device ID that permission unlocks — or blocks.</p>
+    <p class="entry"><span class="entry__term">First-Party Data Strategy (general concept)</span> — The industry-wide shift toward brands using their own data — site behavior, CRM, loyalty programs — as third-party data dries up.</p>
+    <p class="entry"><span class="entry__term">Consent Management Platform (CMP)</span> — The tool behind a cookie banner, managing and recording user consent. What it does, conceptually — not what any specific law requires. <span class="entry__flag">Anything past this — what a CMP must legally include, how a specific law applies — is a Punch-contact-or-legal conversation.</span></p>
+  </section>
+
+  <div class="cta-card">
+    <h3>Didn't find what you needed?</h3>
+    <p>The Help Desk covers the basics. For anything strategic, account-specific, or time-sensitive, your Punch contact is the right call.</p>
+    <a class="btn" href="contact.html">Talk To A Strategist →</a>
+  </div>
+</main>
+
+</body>
+</html>
