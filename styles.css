@@ -254,6 +254,66 @@ hr.rule{
 }
 .placeholder p{ color: var(--ink-soft); max-width: 46ch; margin: 0 auto 18px; }
 
+/* ---- Pagination footer (standalone topic pages) ---- */
+.pagination{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 56px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.pagination a{ text-decoration: none; }
+.pagination .prev::before{ content: "← "; }
+.pagination .next::after{ content: " →"; }
+.pagination .to-wiki{
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.pagination .to-wiki:hover{ color: var(--orange); }
+
+/* ---- Wiki hub cards ---- */
+.hub-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+.hub-card{
+  display: block;
+  text-decoration: none;
+  border: 1.5px solid var(--rule);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+  background: #fff;
+}
+.hub-card:hover{
+  border-color: var(--orange-bright);
+  transform: translateY(-2px);
+  background: #fffaf3;
+}
+.hub-card__num{
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+}
+.hub-card__title{
+  font-family: 'Anton', sans-serif;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin: 4px 0 6px;
+}
+.hub-card__desc{
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
 @media (max-width: 560px){
   .header-nav a:not(:last-child){ display: none; }
 }
