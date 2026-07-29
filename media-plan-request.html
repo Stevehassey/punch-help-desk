@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request A Media Plan — The Help Desk</title>
+<title>Request A Media Plan | The Help Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,6 +64,14 @@
   .status-panel.error{ background: rgba(230,130,47,0.08); border: 1.5px solid rgba(230,130,47,0.5); color: var(--ink); }
   .status-panel a{ color: var(--orange); font-weight: 600; }
 </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta property="og:title" content="Request A Media Plan | The Help Desk">
+<meta property="og:description" content="A quick-reference library for digital media buying and political advertising: terms, how-tos, and guides, powered by Punch.">
+<meta property="og:image" content="https://stevehassey.github.io/punch-help-desk/images/og-share-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -82,7 +90,7 @@
 <main class="page">
   <p class="section__label">Request A Media Plan</p>
   <h1 class="page-title">Let's build you a plan.</h1>
-  <p class="page-lede">This isn't a plan generator — it's an intake form. Fill in what you know, and a real Punch strategist puts the actual plan together from there.</p>
+  <p class="page-lede">This isn't a plan generator. It's an intake form. Fill in what you know, and a real Punch strategist puts the actual plan together from there.</p>
 
   <form class="form-grid" id="media-plan-form">
     <div class="field">
@@ -105,11 +113,11 @@
     </div>
     <div class="field">
       <label for="mp-budget">Approximate Budget</label>
-      <input id="mp-budget" name="Budget" type="text" placeholder="e.g. $75,000 — rough is fine">
+      <input id="mp-budget" name="Budget" type="text" placeholder="e.g. $75,000, rough is fine">
     </div>
     <div class="field">
       <label>Flight Dates
-        <span class="hint">When should this run — roughly, if it's not locked yet?</span>
+        <span class="hint">When should this run, roughly, if it's not locked yet?</span>
       </label>
       <div class="date-row">
         <input id="mp-start" name="FlightStart" type="date" aria-label="Start date">
@@ -118,9 +126,9 @@
     </div>
     <div class="field">
       <label for="mp-audience">Audience Tracks
-        <span class="hint">Who are you trying to reach, and in what capacity — persuasion, GOTV, donors, a specific demographic or language audience?</span>
+        <span class="hint">Who are you trying to reach, and in what capacity: persuasion, GOTV, donors, a specific demographic or language audience?</span>
       </label>
-      <textarea id="mp-audience" name="AudienceTracks" placeholder="e.g. Persuasion — likely voters 35+ in District 4; GOTV — registered base voters; Spanish-language outreach"></textarea>
+      <textarea id="mp-audience" name="AudienceTracks" placeholder="e.g. Persuasion: likely voters 35+ in District 4; GOTV: registered base voters; Spanish-language outreach"></textarea>
     </div>
     <div class="field">
       <label for="mp-notes">Anything else worth knowing?</label>
@@ -132,14 +140,14 @@
   <p class="or-line">Prefer email? Reach us directly at <a href="mailto:steve@punch.company">steve@punch.company</a>.</p>
 
   <div class="status-panel success" id="mp-success">
-    <strong>Got it — thanks.</strong> Your request is in, and a Punch strategist will follow up soon.
+    <strong>Got it, thanks.</strong> Your request is in, and a Punch strategist will follow up soon.
   </div>
 
   <div class="status-panel error" id="mp-error">
-    <strong>That didn't go through.</strong> Sorry about that — please email the details directly instead: <a href="mailto:steve@punch.company" id="mp-error-mailto">steve@punch.company</a>.
+    <strong>That didn't go through.</strong> Sorry about that. Please email the details directly instead: <a href="mailto:steve@punch.company" id="mp-error-mailto">steve@punch.company</a>.
   </div>
 
-  <p class="note">Note for implementation: submissions save to a connected Google Sheet and trigger an email notification via a small Apps Script — no server required. Until <code>SCRIPT_URL</code> near the top of this page's script is set to a real deployed Apps Script Web App URL, submissions will fail over to the error message above (with the mailto fallback), so make sure that's filled in before this goes live.</p>
+  <p class="note">Note for implementation: submissions save to a connected Google Sheet and trigger an email notification via a small Apps Script (no server required). Until <code>SCRIPT_URL</code> near the top of this page's script is set to a real deployed Apps Script Web App URL, submissions will fail over to the error message above (with the mailto fallback), so make sure that's filled in before this goes live.</p>
 
   <div class="cta-card">
     <h3>Not ready to fill this out yet?</h3>
@@ -161,7 +169,7 @@
   function buildFallbackMailto(formData){
     var yourOrg = formData.get('YourOrganization') || '';
     var clientOrg = formData.get('Organization') || '';
-    var subject = 'Media Plan Request' + (clientOrg ? ' — ' + clientOrg : '') + (yourOrg ? ' (via ' + yourOrg + ')' : '');
+    var subject = 'Media Plan Request' + (clientOrg ? ': ' + clientOrg : '') + (yourOrg ? ' (via ' + yourOrg + ')' : '');
     var body = [
       'Name: ' + (formData.get('Name') || ''),
       'Email: ' + (formData.get('Email') || ''),
@@ -189,7 +197,7 @@
     document.getElementById('mp-error-mailto').href = fallbackMailto;
 
     if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
-      // Not configured yet — go straight to the fallback rather than attempting a request.
+      // Not configured yet: go straight to the fallback rather than attempting a request.
       errorPanel.classList.add('visible');
       errorPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
       return;

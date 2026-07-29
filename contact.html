@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Talk To A Strategist — The Help Desk</title>
+<title>Talk To A Strategist | The Help Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,6 +62,14 @@
   .status-panel.error{ background: rgba(230,130,47,0.08); border: 1.5px solid rgba(230,130,47,0.5); color: var(--ink); }
   .status-panel a{ color: var(--orange); font-weight: 600; }
 </style>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta property="og:title" content="Talk To A Strategist | The Help Desk">
+<meta property="og:description" content="A quick-reference library for digital media buying and political advertising: terms, how-tos, and guides, powered by Punch.">
+<meta property="og:image" content="https://stevehassey.github.io/punch-help-desk/images/og-share-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -79,7 +87,7 @@
 <main class="page">
   <p class="section__label">Talk To A Strategist</p>
   <h1 class="page-title">A media plan starts with a conversation, not a search bar.</h1>
-  <p class="page-lede">Strategy, budget calls, and anything specific to your account go beyond what the Help Desk is built for — that's exactly what your Punch team handles. Tell us a bit about what you're working on, and we'll get the right person looped in.</p>
+  <p class="page-lede">Strategy, budget calls, and anything specific to your account go beyond what the Help Desk is built for: that's exactly what your Punch team handles. Tell us a bit about what you're working on, and we'll get the right person looped in.</p>
 
   <form class="form-grid" id="strategist-form">
     <div class="field">
@@ -92,7 +100,7 @@
     </div>
     <div class="field">
       <label for="message">What are you working on?</label>
-      <textarea id="message" name="Message" placeholder="A few sentences is plenty — goals, timing, whatever's useful."></textarea>
+      <textarea id="message" name="Message" placeholder="A few sentences is plenty: goals, timing, whatever's useful."></textarea>
     </div>
     <button class="submit-btn" type="submit" id="strategist-submit-btn">Get connected</button>
   </form>
@@ -100,14 +108,14 @@
   <p class="or-line">Prefer email? Reach us directly at <a href="mailto:steve@punch.company">steve@punch.company</a>.</p>
 
   <div class="status-panel success" id="strategist-success">
-    <strong>Got it — thanks.</strong> Someone from Punch will follow up soon.
+    <strong>Got it, thanks.</strong> Someone from Punch will follow up soon.
   </div>
 
   <div class="status-panel error" id="strategist-error">
-    <strong>That didn't go through.</strong> Sorry about that — please email us directly instead: <a href="mailto:steve@punch.company" id="strategist-error-mailto">steve@punch.company</a>.
+    <strong>That didn't go through.</strong> Sorry about that. Please email us directly instead: <a href="mailto:steve@punch.company" id="strategist-error-mailto">steve@punch.company</a>.
   </div>
 
-  <p class="note">Note for implementation: submissions save to a connected Google Sheet and trigger an email notification via a small Apps Script — no server required. Until <code>SCRIPT_URL</code> near the bottom of this page's script is set to a real deployed Apps Script Web App URL, submissions will fail over to the error message above (with the mailto fallback), so make sure that's filled in before this goes live.</p>
+  <p class="note">Note for implementation: submissions save to a connected Google Sheet and trigger an email notification via a small Apps Script (no server required). Until <code>SCRIPT_URL</code> near the bottom of this page's script is set to a real deployed Apps Script Web App URL, submissions will fail over to the error message above (with the mailto fallback), so make sure that's filled in before this goes live.</p>
 </main>
 
 <script>
@@ -121,7 +129,7 @@
   var errorPanel = document.getElementById('strategist-error');
 
   function buildFallbackMailto(formData){
-    var subject = 'Talk To A Strategist' + (formData.get('Name') ? ' — ' + formData.get('Name') : '');
+    var subject = 'Talk To A Strategist' + (formData.get('Name') ? ': ' + formData.get('Name') : '');
     var body = [
       'Name: ' + (formData.get('Name') || ''),
       'Email: ' + (formData.get('Email') || ''),
@@ -178,7 +186,7 @@
   if(q){
     var ta = document.getElementById('message');
     if(ta && !ta.value){
-      ta.value = 'I searched the Help Desk for: "' + q + '" — could someone follow up?';
+      ta.value = 'I searched the Help Desk for: "' + q + '". Could someone follow up?';
     }
   }
 })();
