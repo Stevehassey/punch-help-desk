@@ -54,7 +54,7 @@ a:hover{ color: var(--orange-bright); }
   width: auto;
   flex-shrink: 0;
   display: block;
-  transform: translateY(-2px);
+  transform: translateY(2px);
 }
 
 .brand__word{
