@@ -44,7 +44,7 @@ a:hover{ color: var(--orange-bright); }
 .brand{
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
   text-decoration: none;
   color: #fff;
 }
@@ -54,6 +54,7 @@ a:hover{ color: var(--orange-bright); }
   width: auto;
   flex-shrink: 0;
   display: block;
+  transform: translateY(-2px);
 }
 
 .brand__word{
