@@ -49,28 +49,11 @@ a:hover{ color: var(--orange-bright); }
   color: #fff;
 }
 
-.brand__ribbon{
-  position: relative;
-  width: 74px;
+.brand__logo{
   height: 30px;
+  width: auto;
   flex-shrink: 0;
-}
-.brand__ribbon-layer{
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(6% 0%, 100% 0%, 88% 50%, 100% 100%, 6% 100%, 20% 50%);
-}
-.brand__ribbon-layer--back{ background: var(--ribbon-dark); transform: translate(3px,3px); opacity: 0.9; }
-.brand__ribbon-layer--front{
-  background: var(--orange-bright);
-  display: flex; align-items: center; justify-content: center;
-}
-.brand__ribbon-text{
-  font-family: 'Anton', sans-serif;
-  color: var(--cream);
-  font-size: 0.62rem;
-  letter-spacing: 0.03em;
-  padding-left: 6%;
+  display: block;
 }
 
 .brand__word{

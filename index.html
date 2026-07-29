@@ -57,45 +57,17 @@
       linear-gradient(0deg, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.08) 32%, rgba(3,3,3,0) 55%, rgba(3,3,3,0.18) 100%);
   }
 
-  /* Ribbon badge — layered banner shape, recreated as a signature element */
+  /* Punch logo */
   .ribbon-wrap{
     display: inline-block;
     margin: 0 0 clamp(24px, 4vw, 40px) -2px;
     filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
   }
 
-  .ribbon{
-    position: relative;
+  .ribbon-wrap img{
+    display: block;
     width: clamp(150px, 18vw, 230px);
-    height: clamp(58px, 6.5vw, 84px);
-  }
-
-  .ribbon__layer{
-    position: absolute;
-    inset: 0;
-    clip-path: polygon(6% 0%, 100% 0%, 88% 50%, 100% 100%, 6% 100%, 20% 50%);
-  }
-
-  .ribbon__layer--back{
-    background: var(--ribbon-dark);
-    transform: translate(6px, 7px);
-    opacity: 0.9;
-  }
-
-  .ribbon__layer--front{
-    background: var(--ribbon);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ribbon__text{
-    font-family: 'Anton', sans-serif;
-    color: var(--cream);
-    font-size: clamp(1.05rem, 2vw, 1.6rem);
-    letter-spacing: 0.03em;
-    padding-left: 6%;
-    line-height: 1;
+    height: auto;
   }
 
   .hero__content{
@@ -320,12 +292,7 @@
 
   <div class="hero__content">
     <div class="ribbon-wrap anim">
-      <div class="ribbon">
-        <div class="ribbon__layer ribbon__layer--back"></div>
-        <div class="ribbon__layer ribbon__layer--front">
-          <span class="ribbon__text">PUNCH</span>
-        </div>
-      </div>
+      <img src="images/punch-logo.png" alt="Punch">
     </div>
 
     <p class="eyebrow anim">THE</p>
