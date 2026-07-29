@@ -59,10 +59,8 @@
 
   /* Ribbon badge — layered banner shape, recreated as a signature element */
   .ribbon-wrap{
-    position: absolute;
-    top: clamp(20px, 4vw, 44px);
-    left: clamp(20px, 4vw, 44px);
-    z-index: 5;
+    display: inline-block;
+    margin: 0 0 clamp(24px, 4vw, 40px) -2px;
     filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
   }
 
@@ -308,8 +306,8 @@
   }
 
   @media (max-width: 560px){
-    .hero{ align-items: flex-end; }
-    .search-form{ max-width: 100%; }
+    .hero{ align-items: flex-start; }
+    .search-form{ max-width: 100%; margin-top: calc(54vh - 238px); }
     .chip{ white-space: nowrap; }
   }
 </style>
@@ -320,16 +318,16 @@
   <div class="hero__bg" role="img" aria-label="A librarian sitting at her library desk, surrounded by books"></div>
   <div class="hero__scrim"></div>
 
-  <div class="ribbon-wrap anim">
-    <div class="ribbon">
-      <div class="ribbon__layer ribbon__layer--back"></div>
-      <div class="ribbon__layer ribbon__layer--front">
-        <span class="ribbon__text">PUNCH</span>
+  <div class="hero__content">
+    <div class="ribbon-wrap anim">
+      <div class="ribbon">
+        <div class="ribbon__layer ribbon__layer--back"></div>
+        <div class="ribbon__layer ribbon__layer--front">
+          <span class="ribbon__text">PUNCH</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="hero__content">
     <p class="eyebrow anim">THE</p>
     <h1 class="headline anim">HELP DESK</h1>
     <div class="rule"></div>
