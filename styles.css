@@ -315,7 +315,8 @@ hr.rule{
 }
 
 @media (max-width: 560px){
-  .header-nav a:not(:last-child){ display: none; }
+  .site-header{ flex-wrap: wrap; row-gap: 10px; }
+  .header-nav{ width: 100%; justify-content: flex-start; gap: 16px; font-size: 0.85rem; }
 }
 
 /* ---- Start Here steps ---- */

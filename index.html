@@ -310,7 +310,7 @@
   @media (max-width: 560px){
     .hero{ align-items: flex-end; }
     .search-form{ max-width: 100%; }
-    .chip{ flex: 1 1 calc(50% - 6px); text-align: center; }
+    .chip{ white-space: nowrap; }
   }
 </style>
 </head>
@@ -353,6 +353,7 @@
 
     <nav class="chips anim" aria-label="Primary actions">
       <a class="chip" href="start-here.html">Start Here</a>
+      <a class="chip" href="media-plan-request.html">Request A Media Plan</a>
       <a class="chip" href="checklist.html">Launch Checklist</a>
       <a class="chip" href="contact.html">Talk To A Strategist</a>
     </nav>
@@ -385,7 +386,8 @@
     { file: 'checklist.html', keywords: ['launch','checklist','go live','pre-launch','ready to launch'] },
     { file: 'faq.html', keywords: ['how long does it take','launch timeline','get started','long-term contract','how is billing','budget structured','pause a campaign','cancel a campaign','point of contact','process faq','how often will we'] },
     { file: 'start-here.html', keywords: ['start here','new to this','where do i start','where should i start','getting started','new to digital'] },
-    { file: 'ideas.html', keywords: ['cool digital ideas','interactive ctv','dynamic creative','dco','vertical video','geofenced rally','local news targeting','ai-generated creative','audio ads streaming','podcast ads'] }
+    { file: 'ideas.html', keywords: ['cool digital ideas','interactive ctv','dynamic creative','dco','vertical video','geofenced rally','local news targeting','ai-generated creative','audio ads streaming','podcast ads'] },
+    { file: 'media-plan-request.html', keywords: ['media plan','request a plan','need a plan','build a plan','flight dates','request a media plan'] }
   ];
 
   function normalize(s){ return s.toLowerCase().trim(); }
