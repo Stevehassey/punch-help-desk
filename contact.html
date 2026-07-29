@@ -40,6 +40,7 @@
     transition: transform 0.15s ease, background 0.15s ease;
   }
   .submit-btn:hover{ transform: translateY(-1px); background: #d6741f; }
+  .submit-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
   .or-line{ margin: 26px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
   .note{
     margin-top: 40px;
@@ -48,6 +49,18 @@
     border-top: 1px solid var(--rule);
     padding-top: 16px;
   }
+  .status-panel{
+    display: none;
+    max-width: 480px;
+    margin-top: 24px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+  }
+  .status-panel.visible{ display: block; }
+  .status-panel.success{ background: rgba(46,125,50,0.08); border: 1.5px solid rgba(46,125,50,0.4); color: #1e5620; }
+  .status-panel.error{ background: rgba(230,130,47,0.08); border: 1.5px solid rgba(230,130,47,0.5); color: var(--ink); }
+  .status-panel a{ color: var(--orange); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -68,29 +81,98 @@
   <h1 class="page-title">A media plan starts with a conversation, not a search bar.</h1>
   <p class="page-lede">Strategy, budget calls, and anything specific to your account go beyond what the Help Desk is built for — that's exactly what your Punch team handles. Tell us a bit about what you're working on, and we'll get the right person looped in.</p>
 
-  <form class="form-grid" onsubmit="return false;">
+  <form class="form-grid" id="strategist-form">
     <div class="field">
       <label for="name">Name</label>
-      <input id="name" type="text" autocomplete="name" required>
+      <input id="name" name="Name" type="text" autocomplete="name" required>
     </div>
     <div class="field">
       <label for="email">Email</label>
-      <input id="email" type="email" autocomplete="email" required>
+      <input id="email" name="Email" type="email" autocomplete="email" required>
     </div>
     <div class="field">
       <label for="message">What are you working on?</label>
-      <textarea id="message" placeholder="A few sentences is plenty — goals, timing, whatever's useful."></textarea>
+      <textarea id="message" name="Message" placeholder="A few sentences is plenty — goals, timing, whatever's useful."></textarea>
     </div>
-    <button class="submit-btn" type="submit">Get connected</button>
+    <button class="submit-btn" type="submit" id="strategist-submit-btn">Get connected</button>
   </form>
 
   <p class="or-line">Prefer email? Reach us directly at <a href="mailto:steve@punch.company">steve@punch.company</a>.</p>
 
-  <p class="note">Note for implementation: the form above doesn't submit anywhere yet — it still needs to be wired up to a real inbox, CRM, or lead-routing tool. The mailto link right above this note is live and points to steve@punch.company.</p>
+  <div class="status-panel success" id="strategist-success">
+    <strong>Got it — thanks.</strong> Someone from Punch will follow up soon.
+  </div>
+
+  <div class="status-panel error" id="strategist-error">
+    <strong>That didn't go through.</strong> Sorry about that — please email us directly instead: <a href="mailto:steve@punch.company" id="strategist-error-mailto">steve@punch.company</a>.
+  </div>
+
+  <p class="note">Note for implementation: submissions save to a connected Google Sheet and trigger an email notification via a small Apps Script — no server required. Until <code>SCRIPT_URL</code> near the bottom of this page's script is set to a real deployed Apps Script Web App URL, submissions will fail over to the error message above (with the mailto fallback), so make sure that's filled in before this goes live.</p>
 </main>
 
 <script>
 (function(){
+  // PASTE your deployed Google Apps Script Web App URL here (ends in /exec).
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFh690iSHMcGLfQ2q0kl8AeTr1WsoI8vsBO65WSGy3xSZDbzKWgrb7NYGQg_gEV-vZ/exec';
+
+  var form = document.getElementById('strategist-form');
+  var submitBtn = document.getElementById('strategist-submit-btn');
+  var successPanel = document.getElementById('strategist-success');
+  var errorPanel = document.getElementById('strategist-error');
+
+  function buildFallbackMailto(formData){
+    var subject = 'Talk To A Strategist' + (formData.get('Name') ? ' — ' + formData.get('Name') : '');
+    var body = [
+      'Name: ' + (formData.get('Name') || ''),
+      'Email: ' + (formData.get('Email') || ''),
+      '',
+      'Message:',
+      (formData.get('Message') || 'Not specified')
+    ].join('\n');
+    return 'mailto:steve@punch.company?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    successPanel.classList.remove('visible');
+    errorPanel.classList.remove('visible');
+
+    var formData = new FormData(form);
+    document.getElementById('strategist-error-mailto').href = buildFallbackMailto(formData);
+
+    if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      errorPanel.classList.add('visible');
+      errorPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData
+    }).then(function(response){
+      if (!response.ok) { throw new Error('Bad response: ' + response.status); }
+      return response.json();
+    }).then(function(data){
+      if (data && data.result === 'success') {
+        form.reset();
+        successPanel.classList.add('visible');
+        successPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      } else {
+        throw new Error('Unexpected response');
+      }
+    }).catch(function(){
+      errorPanel.classList.add('visible');
+      errorPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }).finally(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get connected';
+    });
+  });
+
+  // Pre-fill message from a search-bar handoff (?q=...), same as before
   var params = new URLSearchParams(window.location.search);
   var q = params.get('q');
   if(q){
