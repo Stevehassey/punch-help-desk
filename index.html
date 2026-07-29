@@ -192,6 +192,14 @@
     margin: 22px 0 10px 2px;
   }
 
+  .search-hint{
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    margin: 10px 0 0 4px;
+  }
+
   .chip--secondary{
     font-size: clamp(0.76rem, 1.3vw, 0.87rem);
     padding: 10px 18px;
@@ -319,6 +327,7 @@
   .headline.anim{ animation-delay: 0.22s; }
   .powered-by.anim{ animation-delay: 0.34s; }
   .search-form.anim{ animation-delay: 0.44s; }
+  .search-hint.anim{ animation-delay: 0.48s; }
   .chips.anim{ animation-delay: 0.54s; }
   .chips-label.anim{ animation-delay: 0.5s; }
 
@@ -330,8 +339,10 @@
     .anim{ animation: none !important; opacity: 1 !important; transform: none !important; }
   }
 
-  @media (max-width: 560px){
+  @media (max-width: 560px), (max-aspect-ratio: 1/1){
     .hero{ align-items: flex-start; }
+    .hero__bg{ background-position: 46% 30%; }
+    .headline{ font-size: clamp(2.75rem, 5.5vw, 3.4rem); }
     .search-form{ max-width: 100%; margin-top: calc(54vh - 238px); }
     .chip{ white-space: nowrap; }
   }
@@ -366,6 +377,7 @@
       </form>
       <div class="search-suggestions" id="search-suggestions"></div>
     </div>
+    <p class="search-hint anim">Searches this site's library, not the open web.</p>
 
     <div class="search-fallback" id="search-fallback">
       <p>That's beyond the scope of the Help Desk. Want to reach out to a strategist?</p>
