@@ -1,63 +1,57 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Social — The Help Desk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-
 <header class="site-header">
-  <a class="brand" href="index.html">
-    <img class="brand__logo" src="images/punch-logo.png" alt="Punch">
-    <span class="brand__word">Help Desk</span>
-  </a>
-  <nav class="header-nav">
-    <a href="index.html">Home</a>
-    <a href="wiki.html">Wiki</a>
-    <a href="contact.html">Talk To A Strategist</a>
-  </nav>
+<a class="brand" href="index.html">
+<img alt="Punch" class="brand__logo" src="images/punch-logo.png"/>
+<span class="brand__word">Help Desk</span>
+</a>
+<nav class="header-nav">
+<a href="index.html">Home</a>
+<a href="wiki.html">Wiki</a>
+<a href="contact.html">Talk To A Strategist</a>
+</nav>
 </header>
-
 <main class="page">
-  <p class="section__label">05 — Social</p>
-  <h1 class="page-title">Social</h1>
-  <p class="page-lede">Meta, X, and Snapchat are the social platforms that currently allow political advertising in the US, each with its own certification process. TikTok, LinkedIn, and Pinterest all ban political ads outright, so they're not covered here.</p>
-
-    <p class="entry"><span class="entry__term">Account Structure</span> — Most platforms organize things in layers. On Meta, it's Campaign → Ad Set → Ad. On X and Snapchat, it's a similar Campaign → Ad Group/Set → Ad pattern. Budget and targeting usually live in the middle layer; the actual ad creative sits at the bottom.</p>
-    <p class="entry"><span class="entry__term">"Paid For By" Disclaimer</span> — A required, verified statement naming who's responsible for the ad — standard across Meta, X, and Snapchat for political ads. The exact wording and format rules are platform-specific, and campaign-finance law adds another layer on top — confirm the specifics with your Punch contact or legal team.</p>
-    <p class="entry"><span class="entry__term">Ad Transparency Library</span> — Most platforms that allow political ads publish them (and often, the amount spent) in a public, searchable library — Meta's is the most complete and keeps records for years. Assume anything you run in this category is publicly visible, not just visible to your target audience.</p>
-    <p class="entry"><span class="entry__term">Pre-Election Blackout Window</span> — Some platforms (Meta, notably) stop accepting brand-new political ads in the final stretch before an election, though already-running ads can often keep delivering. Windows vary by platform and aren't always announced far in advance — worth checking current policy close to any election date rather than assuming last cycle's rules still apply.</p>
-    <p class="entry"><span class="entry__term">Pixel / Conversions API</span> — The Pixel is a small piece of code that tracks what visitors do on your website — a donation page or volunteer sign-up form, for instance. The Conversions API sends that same kind of information a different way — directly from your server — which has become the more reliable option as browser tracking has gotten less dependable.</p>
-    <p class="entry"><span class="entry__term">Custom Audience vs. Lookalike Audience</span> — A custom audience is built from your own data — a voter file, a donor list, past site visitors. A lookalike audience is normally a new group a platform builds to resemble that list — but for political ads on Meta specifically, lookalike expansion is currently disabled, along with ZIP-level geo-targeting and age/gender exclusions, the moment an ad is flagged as political.</p>
-    <p class="entry"><span class="entry__term">Boosted Post vs. Paid Ad</span> — "Boosting" promotes an existing post with a few simplified settings. For political ads, this generally isn't the right path — the authorization, disclaimer, and disclosure requirements assume a properly built ad through the full ads platform, not a quick boost.</p>
-    <p class="entry"><span class="entry__term">Algorithm-Driven Optimization (e.g., Advantage+)</span> — Once an ad is flagged as political, platforms typically strip away some of this automation rather than lean into it — targeting gets locked to broader geography, and options like lookalike expansion or demographic exclusions get disabled to prevent discriminatory targeting. Less "let the algorithm decide," more guardrails.</p>
-    <p class="entry"><span class="entry__term">AI-Generated Creative Disclosure</span> — If creative was made or edited using generative AI, several platforms now require that to be disclosed — sometimes as a self-reported tag, sometimes detected automatically. Worth confirming current requirements before running AI-assisted creative in this category.</p>
-    <p class="entry"><span class="entry__term">Basic Creative Specs</span> — Every platform has its own rules for image size, video length, and text limits — and they change from time to time. Always check current requirements before finalizing an ad; don't rely on what you remember from last cycle.</p>
-
-    <p class="subhead">How-To</p>
-    <div class="entry" id="meta-verification"><span class="entry__term">How to get authorized for political ads on Meta</span> — Beyond standard Business Manager verification, political and social-issue advertisers need a separate authorization: confirming identity and US residency, and setting up the "Paid for by" disclaimer that will show on every ad. It's a distinct process from general business verification, and it's what unlocks the ability to run this category of ad at all. <span class="entry__flag">If authorization gets stuck or a requirement seems unclear, that's a Punch-contact conversation, not a guessing game.</span></div>
-    <div class="entry" id="meta-business-manager"><span class="entry__term">How to set up a Meta Business Manager</span> — Create the account at business.facebook.com, add your Page(s) and ad account(s), then assign access to your team. Political ad authorization gets layered on top of this foundation.</div>
-    <div class="entry" id="meta-pixel"><span class="entry__term">How to install the Meta Pixel / Conversions API</span> — In simple terms: the Pixel is code added to your website (often through a tag manager) that fires when someone takes a key action, like submitting a donation or volunteer form. The Conversions API is its behind-the-scenes counterpart, set up through Business Manager. This part is genuinely technical and site-specific — bring in your dev team and your Punch contact rather than trying to do it from a wiki page.</div>
-    <div class="entry" id="x-certification"><span class="entry__term">How to get certified for political ads on X</span> — X requires advertisers to apply for certification before running political or issue ads — a process that verifies identity and, in the US, confirms you're eligible to advertise in this category. Approval typically takes a few business days, so this isn't a same-day setup step.</div>
-    <div class="entry" id="snapchat-certification"><span class="entry__term">How to get certified for political ads on Snapchat</span> — Snap runs its own political-advertiser intake process, and expects ads to carry a clear "Paid for by" disclosure. Snap also asks for a more measured tone than pure attack messaging — worth factoring into creative planning, not just account setup.</div>
-
-  <div class="pagination">
-    <a class="prev" href="youtube.html">YouTube / Online Video</a>
-    <a class="to-wiki" href="wiki.html">All topics</a>
-    <a class="next" href="search.html">Search</a>
-  </div>
-
-  <div class="cta-card">
-    <h3>Didn't find what you needed?</h3>
-    <p>This page covers the basics. For anything strategic, account-specific, or jurisdiction-specific, your Punch contact is the right call.</p>
-    <a class="btn" href="contact.html">Talk To A Strategist →</a>
-  </div>
+<p class="section__label">05 — Social</p>
+<h1 class="page-title">Social</h1>
+<p class="page-lede">Meta, X, and Snapchat are the social platforms that currently allow political advertising in the US, each with its own certification process. TikTok, LinkedIn, and Pinterest all ban political ads outright, so they're not covered here.</p>
+<p class="entry" id="account-structure"><span class="entry__term">Account Structure</span> — Most platforms organize things in layers. On Meta, it's Campaign → Ad Set → Ad. On X and Snapchat, it's a similar Campaign → Ad Group/Set → Ad pattern. Budget and targeting usually live in the middle layer; the actual ad creative sits at the bottom.</p>
+<p class="entry" id="paid-for-by-disclaimer"><span class="entry__term">"Paid For By" Disclaimer</span> — A required, verified statement naming who's responsible for the ad — standard across Meta, X, and Snapchat for political ads. The exact wording and format rules are platform-specific, and campaign-finance law adds another layer on top — confirm the specifics with your Punch contact or legal team.</p>
+<p class="entry" id="ad-transparency-library"><span class="entry__term">Ad Transparency Library</span> — Most platforms that allow political ads publish them (and often, the amount spent) in a public, searchable library — Meta's is the most complete and keeps records for years. Assume anything you run in this category is publicly visible, not just visible to your target audience.</p>
+<p class="entry" id="pre-election-blackout-window"><span class="entry__term">Pre-Election Blackout Window</span> — Some platforms (Meta, notably) stop accepting brand-new political ads in the final stretch before an election, though already-running ads can often keep delivering. Windows vary by platform and aren't always announced far in advance — worth checking current policy close to any election date rather than assuming last cycle's rules still apply.</p>
+<p class="entry" id="pixel-conversions-api"><span class="entry__term">Pixel / Conversions API</span> — The Pixel is a small piece of code that tracks what visitors do on your website — a donation page or volunteer sign-up form, for instance. The Conversions API sends that same kind of information a different way — directly from your server — which has become the more reliable option as browser tracking has gotten less dependable.</p>
+<p class="entry" id="custom-audience-vs-lookalike-audience"><span class="entry__term">Custom Audience vs. Lookalike Audience</span> — A custom audience is built from your own data — a voter file, a donor list, past site visitors. A lookalike audience is normally a new group a platform builds to resemble that list — but for political ads on Meta specifically, lookalike expansion is currently disabled, along with ZIP-level geo-targeting and age/gender exclusions, the moment an ad is flagged as political.</p>
+<p class="entry" id="boosted-post-vs-paid-ad"><span class="entry__term">Boosted Post vs. Paid Ad</span> — "Boosting" promotes an existing post with a few simplified settings. For political ads, this generally isn't the right path — the authorization, disclaimer, and disclosure requirements assume a properly built ad through the full ads platform, not a quick boost.</p>
+<p class="entry" id="algorithm-driven-optimization-e-g-advantage"><span class="entry__term">Algorithm-Driven Optimization (e.g., Advantage+)</span> — Once an ad is flagged as political, platforms typically strip away some of this automation rather than lean into it — targeting gets locked to broader geography, and options like lookalike expansion or demographic exclusions get disabled to prevent discriminatory targeting. Less "let the algorithm decide," more guardrails.</p>
+<p class="entry" id="ai-generated-creative-disclosure"><span class="entry__term">AI-Generated Creative Disclosure</span> — If creative was made or edited using generative AI, several platforms now require that to be disclosed — sometimes as a self-reported tag, sometimes detected automatically. Worth confirming current requirements before running AI-assisted creative in this category.</p>
+<p class="entry" id="basic-creative-specs"><span class="entry__term">Basic Creative Specs</span> — Every platform has its own rules for image size, video length, and text limits — and they change from time to time. Always check current requirements before finalizing an ad; don't rely on what you remember from last cycle.</p>
+<p class="subhead">How-To</p>
+<div class="entry" id="meta-verification"><span class="entry__term">How to get verified and authorized for political ads on Meta</span> — Beyond standard Business Manager verification, political and social-issue advertisers need a separate authorization: confirming identity and US residency, and setting up the "Paid for by" disclaimer that will show on every ad. It's a distinct process from general business verification, and it's what unlocks the ability to run this category of ad at all. <span class="entry__flag">If authorization gets stuck or a requirement seems unclear, that's a Punch-contact conversation, not a guessing game.</span></div>
+<div class="entry" id="meta-business-manager"><span class="entry__term">How to set up a Meta Business Manager</span> — Create the account at business.facebook.com, add your Page(s) and ad account(s), then assign access to your team. Political ad authorization gets layered on top of this foundation.</div>
+<div class="entry" id="meta-pixel"><span class="entry__term">How to install the Meta Pixel / Conversions API</span> — In simple terms: the Pixel is code added to your website (often through a tag manager) that fires when someone takes a key action, like submitting a donation or volunteer form. The Conversions API is its behind-the-scenes counterpart, set up through Business Manager. This part is genuinely technical and site-specific — bring in your dev team and your Punch contact rather than trying to do it from a wiki page.</div>
+<div class="entry" id="x-certification"><span class="entry__term">How to get certified for political ads on X</span> — X requires advertisers to apply for certification before running political or issue ads — a process that verifies identity and, in the US, confirms you're eligible to advertise in this category. Approval typically takes a few business days, so this isn't a same-day setup step.</div>
+<div class="entry" id="snapchat-certification"><span class="entry__term">How to get certified for political ads on Snapchat</span> — Snap runs its own political-advertiser intake process, and expects ads to carry a clear "Paid for by" disclosure. Snap also asks for a more measured tone than pure attack messaging — worth factoring into creative planning, not just account setup.</div>
+<div class="pagination">
+<a class="prev" href="youtube.html">YouTube / Online Video</a>
+<a class="to-wiki" href="wiki.html">All topics</a>
+<a class="next" href="search.html">Search</a>
+</div>
+<div class="cta-card">
+<h3>Didn't find what you needed?</h3>
+<p>This page covers the basics. For anything strategic, account-specific, or jurisdiction-specific, your Punch contact is the right call.</p>
+<a class="btn" href="contact.html">Talk To A Strategist →</a>
+</div>
 </main>
-
 </body>
 </html>

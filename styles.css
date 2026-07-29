@@ -358,6 +358,7 @@ hr.rule{
 details.faq-item{
   border-bottom: 1px solid var(--rule);
   padding: 16px 0;
+  scroll-margin-top: 84px;
 }
 details.faq-item summary{
   cursor: pointer;

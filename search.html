@@ -1,62 +1,56 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Search — The Help Desk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-
 <header class="site-header">
-  <a class="brand" href="index.html">
-    <img class="brand__logo" src="images/punch-logo.png" alt="Punch">
-    <span class="brand__word">Help Desk</span>
-  </a>
-  <nav class="header-nav">
-    <a href="index.html">Home</a>
-    <a href="wiki.html">Wiki</a>
-    <a href="contact.html">Talk To A Strategist</a>
-  </nav>
+<a class="brand" href="index.html">
+<img alt="Punch" class="brand__logo" src="images/punch-logo.png"/>
+<span class="brand__word">Help Desk</span>
+</a>
+<nav class="header-nav">
+<a href="index.html">Home</a>
+<a href="wiki.html">Wiki</a>
+<a href="contact.html">Talk To A Strategist</a>
+</nav>
 </header>
-
 <main class="page">
-  <p class="section__label">06 — Search</p>
-  <h1 class="page-title">Search</h1>
-  <p class="page-lede">Google Ads is the search platform for political advertising — Microsoft/Bing now prohibits political ads outright, so it isn't a search option for this kind of campaign.</p>
-
-    <p class="entry"><span class="entry__term">Election Ads Verification</span> — A separate, additional verification Google requires before an advertiser can run ads featuring a candidate or officeholder — distinct from general account verification. It confirms the identity of the actual advertiser (the campaign or committee, not the agency running it) and unlocks a required "who paid for this" disclosure on the ad itself.</p>
-    <p class="entry"><span class="entry__term">Restricted Targeting for Election Ads</span> — Once an ad falls under Google's election ads policy, targeting options narrow considerably: geographic location and contextual signals (placements, topics, keywords) are allowed, but audience targeting, remarketing, uploaded contact lists, and radius targeting around a location are not. This is a firm platform rule, not a suggestion — plan targeting around it rather than assuming standard options apply.</p>
-    <p class="entry"><span class="entry__term">Account Structure (Campaign → Ad Group → Keyword)</span> — Campaigns hold your overall budget and goal. Ad groups organize things by theme. Keywords and the actual ads live inside each ad group.</p>
-    <p class="entry"><span class="entry__term">Quality Score</span> — Google's own 1–10 rating of how relevant your ad is, how likely people are to click it, and how good the page it links to is. A higher score can mean a better position and a lower cost.</p>
-    <p class="entry"><span class="entry__term">Match Types</span> — "Broad match" shows your ad for a wide, loosely related range of searches. "Phrase match" needs the core meaning of your phrase present. "Exact match" needs something very close to your exact wording. The wider the match, the more searches you show up for — but the less precise it gets.</p>
-    <p class="entry"><span class="entry__term">Search Network vs. Display Network</span> — Search ads appear on the results page when someone actually searches for something. Display ads appear on a network of partner websites and apps based on targeting — worth noting that for verified election ads, Display's normal audience-based targeting is largely off the table (see Restricted Targeting, above).</p>
-    <p class="entry"><span class="entry__term">Performance Max (PMax)</span> — One campaign that automatically runs ads across Search, Display, YouTube, Gmail, and Maps using audience signals to steer delivery. Because it leans so heavily on audience-based automation, it's worth confirming with your Punch contact whether PMax is even a fit once an account is Election Ads verified — the restricted-targeting rules and PMax's automated approach may not line up.</p>
-    <p class="entry"><span class="entry__term">Smart Bidding</span> — Google's automated bidding strategies, which use machine learning to adjust how much you bid in real time, based on how likely each opportunity is to convert. Bidding automation isn't the same as audience-targeting automation, so this generally still applies even under election ad restrictions — but confirm with your Punch contact.</p>
-    <p class="entry"><span class="entry__term">SERP (Search Engine Results Page)</span> — The page you land on after typing a search — where the regular ("organic") results and the paid ads both show up.</p>
-    <p class="entry"><span class="entry__term">Ad Rank</span> — The formula that decides where your ad shows up on the page — or whether it shows up at all — combining your bid, your Quality Score, and how well your ad format is expected to perform.</p>
-    <p class="entry"><span class="entry__term">Negative Keywords</span> — Search terms you specifically block your ad from showing up for, to keep out traffic that isn't actually relevant to you.</p>
-
-    <p class="subhead">How-To</p>
-    <div class="entry" id="google-ads-structure"><span class="entry__term">Google Ads account structure, explained</span> — Walks through the campaign → ad group → keyword setup, and why keeping keyword groups tightly themed tends to help both Quality Score and results.</div>
-    <div class="entry" id="conversion-tracking"><span class="entry__term">Conversion tracking, conceptually</span> — The basic idea: you tag the action that actually matters to you — a donation, a volunteer sign-up, an email capture — so the platform can measure it. Actually setting this up is technical and specific to your website — bring in Punch and a developer for the real implementation.</div>
-    <div class="entry" id="election-ads-verification"><span class="entry__term">Applying for Election Ads verification</span> — Done through your Google Ads account, using the same payment-profile information tied to your account. Changing that payment profile later (a new legal name, a new billing setup) triggers a re-verification, so it's worth getting right the first time rather than treating it as a quick edit later. <span class="entry__flag">If verification is denied, stalls, or a requirement is unclear, check with your Punch contact before resubmitting.</span></div>
-
-  <div class="pagination">
-    <a class="prev" href="social.html">Social</a>
-    <a class="to-wiki" href="wiki.html">All topics</a>
-    <a class="next" href="measurement.html">Measurement & Report Literacy</a>
-  </div>
-
-  <div class="cta-card">
-    <h3>Didn't find what you needed?</h3>
-    <p>This page covers the basics. For anything strategic, account-specific, or jurisdiction-specific, your Punch contact is the right call.</p>
-    <a class="btn" href="contact.html">Talk To A Strategist →</a>
-  </div>
+<p class="section__label">06 — Search</p>
+<h1 class="page-title">Search</h1>
+<p class="page-lede">Google Ads is the search platform for political advertising — Microsoft/Bing now prohibits political ads outright, so it isn't a search option for this kind of campaign.</p>
+<p class="entry" id="election-ads-verification-2"><span class="entry__term">Election Ads Verification</span> — A separate, additional verification Google requires before an advertiser can run ads featuring a candidate or officeholder — distinct from general account verification. It confirms the identity of the actual advertiser (the campaign or committee, not the agency running it) and unlocks a required "who paid for this" disclosure on the ad itself.</p>
+<p class="entry" id="restricted-targeting-for-election-ads"><span class="entry__term">Restricted Targeting for Election Ads</span> — Once an ad falls under Google's election ads policy, targeting options narrow considerably: geographic location and contextual signals (placements, topics, keywords) are allowed, but audience targeting, remarketing, uploaded contact lists, and radius targeting around a location are not. This is a firm platform rule, not a suggestion — plan targeting around it rather than assuming standard options apply.</p>
+<p class="entry" id="account-structure-campaign-ad-group-keyword"><span class="entry__term">Account Structure (Campaign → Ad Group → Keyword)</span> — Campaigns hold your overall budget and goal. Ad groups organize things by theme. Keywords and the actual ads live inside each ad group.</p>
+<p class="entry" id="quality-score"><span class="entry__term">Quality Score</span> — Google's own 1–10 rating of how relevant your ad is, how likely people are to click it, and how good the page it links to is. A higher score can mean a better position and a lower cost.</p>
+<p class="entry" id="match-types"><span class="entry__term">Match Types</span> — "Broad match" shows your ad for a wide, loosely related range of searches. "Phrase match" needs the core meaning of your phrase present. "Exact match" needs something very close to your exact wording. The wider the match, the more searches you show up for — but the less precise it gets.</p>
+<p class="entry" id="search-network-vs-display-network"><span class="entry__term">Search Network vs. Display Network</span> — Search ads appear on the results page when someone actually searches for something. Display ads appear on a network of partner websites and apps based on targeting — worth noting that for verified election ads, Display's normal audience-based targeting is largely off the table (see Restricted Targeting, above).</p>
+<p class="entry" id="performance-max-pmax"><span class="entry__term">Performance Max (PMax)</span> — One campaign that automatically runs ads across Search, Display, YouTube, Gmail, and Maps using audience signals to steer delivery. Because it leans so heavily on audience-based automation, it's worth confirming with your Punch contact whether PMax is even a fit once an account is Election Ads verified — the restricted-targeting rules and PMax's automated approach may not line up.</p>
+<p class="entry" id="smart-bidding"><span class="entry__term">Smart Bidding</span> — Google's automated bidding strategies, which use machine learning to adjust how much you bid in real time, based on how likely each opportunity is to convert. Bidding automation isn't the same as audience-targeting automation, so this generally still applies even under election ad restrictions — but confirm with your Punch contact.</p>
+<p class="entry" id="serp-search-engine-results-page"><span class="entry__term">SERP (Search Engine Results Page)</span> — The page you land on after typing a search — where the regular ("organic") results and the paid ads both show up.</p>
+<p class="entry" id="ad-rank"><span class="entry__term">Ad Rank</span> — The formula that decides where your ad shows up on the page — or whether it shows up at all — combining your bid, your Quality Score, and how well your ad format is expected to perform.</p>
+<p class="entry" id="negative-keywords"><span class="entry__term">Negative Keywords</span> — Search terms you specifically block your ad from showing up for, to keep out traffic that isn't actually relevant to you.</p>
+<p class="subhead">How-To</p>
+<div class="entry" id="google-ads-structure"><span class="entry__term">Google Ads account structure, explained</span> — Walks through the campaign → ad group → keyword setup, and why keeping keyword groups tightly themed tends to help both Quality Score and results.</div>
+<div class="entry" id="conversion-tracking"><span class="entry__term">Conversion tracking, conceptually</span> — The basic idea: you tag the action that actually matters to you — a donation, a volunteer sign-up, an email capture — so the platform can measure it. Actually setting this up is technical and specific to your website — bring in Punch and a developer for the real implementation.</div>
+<div class="entry" id="election-ads-verification"><span class="entry__term">Applying for Election Ads verification</span> — Done through your Google Ads account, using the same payment-profile information tied to your account. Changing that payment profile later (a new legal name, a new billing setup) triggers a re-verification, so it's worth getting right the first time rather than treating it as a quick edit later. <span class="entry__flag">If verification is denied, stalls, or a requirement is unclear, check with your Punch contact before resubmitting.</span></div>
+<div class="pagination">
+<a class="prev" href="social.html">Social</a>
+<a class="to-wiki" href="wiki.html">All topics</a>
+<a class="next" href="measurement.html">Measurement &amp; Report Literacy</a>
+</div>
+<div class="cta-card">
+<h3>Didn't find what you needed?</h3>
+<p>This page covers the basics. For anything strategic, account-specific, or jurisdiction-specific, your Punch contact is the right call.</p>
+<a class="btn" href="contact.html">Talk To A Strategist →</a>
+</div>
 </main>
-
 </body>
 </html>

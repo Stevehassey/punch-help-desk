@@ -231,6 +231,56 @@
     transform: translateY(-1px);
   }
 
+  .search-wrap{ position: relative; max-width: 640px; }
+  .search-suggestions{
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    overflow: hidden;
+    z-index: 20;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+  .search-suggestions.visible{ display: block; }
+  .search-suggestions a{
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid #eee2d2;
+  }
+  .search-suggestions a:last-child{ border-bottom: none; }
+  .search-suggestions a:hover,
+  .search-suggestions a.active{
+    background: rgba(230,130,47,0.1);
+  }
+  .search-suggestions .s-title{
+    font-weight: 700;
+    color: #1c1a16;
+    font-size: 0.95rem;
+  }
+  .search-suggestions .s-page{
+    font-weight: 600;
+    color: var(--orange-bright);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+  .search-suggestions .s-snippet{
+    display: block;
+    color: #6b6459;
+    font-size: 0.82rem;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .chip{
     font-family: 'Inter', sans-serif;
     font-weight: 600;
@@ -303,16 +353,19 @@
     <div class="rule"></div>
     <p class="powered-by anim">POWERED BY PUNCH</p>
 
-    <form class="search-form anim" role="search" action="wiki.html" method="get">
-      <label for="help-search" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Ask the Help Desk anything</label>
-      <input id="help-search" name="q" type="text" placeholder="Ask the Help Desk anything…" autocomplete="off">
-      <button type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="7"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </button>
-    </form>
+    <div class="search-wrap">
+      <form class="search-form anim" role="search" action="wiki.html" method="get" autocomplete="off">
+        <label for="help-search" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Ask the Help Desk anything</label>
+        <input id="help-search" name="q" type="text" placeholder="Ask the Help Desk anything…" autocomplete="off">
+        <button type="submit" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+      <div class="search-suggestions" id="search-suggestions"></div>
+    </div>
 
     <div class="search-fallback" id="search-fallback">
       <p>That's beyond the scope of the Help Desk. Want to reach out to a strategist?</p>
@@ -339,72 +392,126 @@
   </div>
 </section>
 
+<script src="fuse.min.js"></script>
 <script>
 (function(){
-  var PAGES = [
-    { file: 'fundamentals.html', keywords: ['cpm','cpc','cpa','cpv','cpcv','vcpm','impression','reach','frequency','ctr','click-through','cvr','conversion rate','viewability','vcr','completion rate','engagement rate','share of voice','sov','first-party data','third-party data','contextual targeting','behavioral targeting','geofencing','lookalike','retargeting','remarketing','frequency cap','funnel','awareness','consideration','brand lift','incrementality','attribution','a/b test','ab test','creative rotation','fatigue','fundamentals','basics','glossary','terms','metrics'] },
-    { file: 'programmatic.html', keywords: ['dsp','ssp','programmatic','rtb','real-time bidding','header bidding','ad exchange','pmp','private marketplace','deal id','guaranteed','brand safety','brand suitability','mrc','viewability standard','fraud','ivt','invalid traffic','pixel','tag','floor price','trade desk','dv360','amazon dsp'] },
-    { file: 'ctv.html', keywords: ['ctv','connected tv','ott','linear tv','addressable','acr','household','streaming','hulu','peacock','roku','apple tv','vod','video on demand','smart tv'] },
-    { file: 'youtube.html', keywords: ['youtube','trueview','skippable','bumper','in-stream','content targeting','audience targeting'] },
-    { file: 'social.html', keywords: ['meta','facebook','instagram','snap','snapchat','twitter','verified','verification','certified','certification','business manager','conversions api','boosted post','custom audience','advantage+','paid for by','disclaimer','ad library','blackout window','social'] },
-    { file: 'search.html', keywords: ['google ads','bing','microsoft ads','search ads','search engine','sem','keyword','quality score','match type','performance max','pmax','smart bidding','serp','ad rank','negative keyword','election ads','election ad verification'] },
-    { file: 'measurement.html', keywords: ['report','wow','week over week','mom','month over month','yoy','year over year','pacing','benchmark','attribution window','data lag','brand lift study','incrementality test','optimization'] },
-    { file: 'checklist.html', keywords: ['launch','checklist','go live','pre-launch','ready to launch'] },
-    { file: 'faq.html', keywords: ['how long does it take','launch timeline','get started','long-term contract','how is billing','budget structured','pause a campaign','cancel a campaign','point of contact','process faq','how often will we'] },
-    { file: 'start-here.html', keywords: ['start here','new to this','where do i start','where should i start','getting started','new to digital'] },
-    { file: 'ideas.html', keywords: ['cool digital ideas','interactive ctv','dynamic creative','dco','vertical video','geofenced rally','local news targeting','ai-generated creative','audio ads streaming','podcast ads'] },
-    { file: 'media-plan-request.html', keywords: ['media plan','request a plan','need a plan','build a plan','flight dates','request a media plan'] }
-  ];
+  var SEARCH_INDEX = [{"title":"CPM (Cost Per Mille — \"mille\" is Latin for thousand)","snippet":"You pay a set price for every 1,000 times your ad shows up, whether or not anyone actually looked at it. It's the standard way display, video, and streaming...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cpm-cost-per-mille-mille-is-latin-for-thousand"},{"title":"CPC (Cost Per Click)","snippet":"You only pay when someone clicks. No click, no charge. Most search ads work this way — you're paying for the action, not just the appearance.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cpc-cost-per-click"},{"title":"CPA (Cost Per Acquisition)","snippet":"You pay per result — a purchase, a lead, a sign-up — not per ad shown or clicked. It's calculated after the campaign runs (total spend ÷ number of results),...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cpa-cost-per-acquisition"},{"title":"CPV (Cost Per View)","snippet":"You pay per video view, mostly on YouTube and similar platforms. A \"view\" is defined by the platform — usually someone watching 30 seconds, or clicking,...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cpv-cost-per-view"},{"title":"CPCV (Cost Per Completed View)","snippet":"Same idea as CPV, but you only pay if someone watches the whole thing, start to finish. Common with streaming TV and higher-end video ads.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cpcv-cost-per-completed-view"},{"title":"vCPM (Viewable CPM)","snippet":"A stricter version of CPM. It only counts impressions that actually had a real chance of being seen (see Viewability, below) — not just every ad that...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"vcpm-viewable-cpm"},{"title":"Flat-Rate / Fixed Placement","snippet":"One price for one spot — like renting a billboard for a month — no matter how many people actually see or click it.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"flat-rate-fixed-placement"},{"title":"PMP (Private Marketplace)","snippet":"An invite-only version of the ad auction. Instead of every advertiser competing for a spot, a website or app opens it up to a smaller, hand-picked group...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"pmp-private-marketplace"},{"title":"Programmatic Guaranteed","snippet":"You and the publisher agree on price and volume ahead of time, just like a traditional ad buy — it just still runs through the same automated buying systems...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"programmatic-guaranteed"},{"title":"Impressions","snippet":"The number of times your ad was shown. Not the number of people who noticed it — just the number of times it appeared on a screen.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"impressions"},{"title":"Reach","snippet":"The number of different people who saw your ad at least once.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"reach"},{"title":"Frequency","snippet":"On average, how many times each of those people saw it. (Reach × Frequency ≈ total impressions.)","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"frequency"},{"title":"CTR (Click-Through Rate)","snippet":"Clicks ÷ impressions — a rough read on how many people who saw the ad actually clicked it.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"ctr-click-through-rate"},{"title":"CVR (Conversion Rate)","snippet":"Of the people who clicked (or sometimes just saw the ad), how many went on to do the thing you wanted — buy, sign up, whatever the goal was.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"cvr-conversion-rate"},{"title":"Viewability","snippet":"Whether your ad had a real chance to be seen — not just loaded somewhere off-screen. Industry standard: at least half the ad visible for one full second...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"viewability"},{"title":"VCR (Video Completion Rate)","snippet":"The percentage of people who watched a video ad all the way to the end.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"vcr-video-completion-rate"},{"title":"Engagement Rate","snippet":"Likes, comments, and shares, divided by how many people saw the post. Mostly a social-platform measure.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"engagement-rate"},{"title":"Share of Voice (SOV)","snippet":"Out of all the ad space bought in your category, how much of it is yours versus your competitors'.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"share-of-voice-sov"},{"title":"First-Party Data","snippet":"Information you already have because it's yours — a voter file, a donor list, your own website visitors and email subscribers.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"first-party-data"},{"title":"Third-Party Data","snippet":"Information collected by someone else and licensed to you. Getting harder to come by as privacy rules tighten industry-wide, and unavailable for use in...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"third-party-data"},{"title":"Contextual Targeting","snippet":"Placing your ad based on the content around it — a news ad next to a current-events article — rather than based on who's looking at it. Generally the safest...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"contextual-targeting"},{"title":"Behavioral Targeting","snippet":"Placing your ad based on what a person has done before — pages visited, past donations — rather than what they're looking at right now.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"behavioral-targeting"},{"title":"Geofencing","snippet":"Targeting anyone physically inside a specific area you've drawn on a map, often a tight radius around one location, like a rally or a polling place. Radius...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"geofencing"},{"title":"Lookalike / Similar Audiences","snippet":"A new group of people a platform builds because they resemble an audience you already have, like your donor list. Currently disabled for political ads on...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"lookalike-similar-audiences"},{"title":"Retargeting / Remarketing","snippet":"Showing ads to people who already showed interest — visited your site, started a donation — but didn't follow through. Not available for Google election...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"retargeting-remarketing"},{"title":"Frequency Capping","snippet":"A limit on how many times one person can see the same ad in a given stretch of time, so it doesn't wear out its welcome.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"frequency-capping"},{"title":"Upper / Mid / Lower Funnel","snippet":"Shorthand for where an ad sits in someone's decision-making journey — upper funnel introduces a candidate or issue, mid builds support, lower pushes toward...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"upper-mid-lower-funnel"},{"title":"Awareness / Consideration / Conversion","snippet":"The three broad stages most campaigns are planned around — get noticed, get considered, get someone to act (vote, donate, volunteer).","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"awareness-consideration-conversion"},{"title":"Brand Lift","snippet":"In a commercial context this measures brand awareness; in a political one, the same survey-based method is generally used to measure candidate or issue...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"brand-lift"},{"title":"Incrementality","snippet":"The results that only happened because of your campaign — separate from results that would've happened anyway.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"incrementality"},{"title":"Attribution","snippet":"The method used to decide which ad gets \"credit\" for an action — a donation, a sign-up. Last-click gives all the credit to the final ad someone saw;...","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"attribution"},{"title":"A/B Testing","snippet":"Running two versions of something — an image, a headline, a message — against each other to see which performs better.","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"a-b-testing"},{"title":"Creative Rotation / Fatigue","snippet":"Cycling through different ad creative so the same audience doesn't see the exact same ad so many times it stops working (that decline is called \"fatigue\").","page":"fundamentals.html","pageLabel":"Ad Basics","anchor":"creative-rotation-fatigue"},{"title":"DSP (Demand-Side Platform)","snippet":"Think of it as the \"shopping app\" advertisers use to buy ad space across thousands of websites and apps at once, instead of calling each one individually....","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"dsp-demand-side-platform"},{"title":"SSP (Supply-Side Platform)","snippet":"The flip side of a DSP — the tool publishers (websites, apps) use to offer up their ad space for sale.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"ssp-supply-side-platform"},{"title":"Ad Exchange","snippet":"The marketplace where DSPs and SSPs actually meet and transact — the trading floor connecting buyers and sellers.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"ad-exchange"},{"title":"RTB (Real-Time Bidding)","snippet":"The auction itself — it happens in the split second it takes a webpage to load, with the ad space going to the highest bidder almost instantly.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"rtb-real-time-bidding"},{"title":"Header Bidding","snippet":"Lets a publisher offer the same ad space to several exchanges at once, so they compete against each other — generally pushes the price up in the publisher's...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"header-bidding"},{"title":"Deal ID","snippet":"A code linking a specific buyer to a specific pre-arranged inventory package in a private marketplace deal.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"deal-id"},{"title":"Open Exchange vs. PMP vs. Programmatic Guaranteed","snippet":"Three levels of the same idea, with increasing control (and usually price): open exchange means anyone can bid, PMP means only an invited group can bid,...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"open-exchange-vs-pmp-vs-programmatic-guaranteed"},{"title":"Brand Safety vs. Brand Suitability","snippet":"Brand safety means keeping your ad away from obviously harmful content (violence, hate speech). Brand suitability goes further — making sure the content...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"brand-safety-vs-brand-suitability"},{"title":"Viewability Standards (MRC)","snippet":"The Media Rating Council sets the industry's official definition of what counts as a \"viewable\" ad — the benchmark everyone measures against.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"viewability-standards-mrc"},{"title":"Ad Fraud / IVT (Invalid Traffic)","snippet":"Fake activity — bots, click farms — that inflates your numbers without a real person ever seeing your ad.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"ad-fraud-ivt-invalid-traffic"},{"title":"Pixel / Tag","snippet":"A small piece of tracking code placed on a website that records what a visitor does there — used for measurement, retargeting, and figuring out if a...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"pixel-tag"},{"title":"Floor Price","snippet":"The lowest amount a publisher is willing to accept for a piece of ad space.","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"floor-price"},{"title":"Political Advertiser Certification (DSP-level)","snippet":"Beyond a platform's own political ad rules, individual DSPs (The Trade Desk, DV360, and others) often run their own political-advertiser certification on...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"political-advertiser-certification-dsp-level"},{"title":"What is a DSP, and how does buying through one actually work?","snippet":"An agency sets up a campaign inside a DSP — who to target, how much to spend, which ad to show — and the DSP automatically bids on matching ad space across...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"what-is-a-dsp"},{"title":"DSP landscape overview","snippet":"A few of the bigger platforms you might hear mentioned — The Trade Desk, DV360, Amazon DSP — each with different strengths, and each with its own...","page":"programmatic.html","pageLabel":"Programmatic & DSPs","anchor":"dsp-landscape"},{"title":"CTV vs. OTT vs. Linear TV","snippet":"Linear TV is traditional, scheduled broadcast or cable — what's \"on\" at a set time. OTT (\"over-the-top\") means any video streamed over the internet instead...","page":"ctv.html","pageLabel":"CTV","anchor":"ctv-vs-ott-vs-linear-tv"},{"title":"Addressable TV","snippet":"The ability to show two different households two different ads during the exact same TV show, based on data about each household. Traditional TV with a...","page":"ctv.html","pageLabel":"CTV","anchor":"addressable-tv"},{"title":"ACR (Automatic Content Recognition) Data","snippet":"Information a smart TV collects about what's actually playing on screen, used to help measure and target CTV ads.","page":"ctv.html","pageLabel":"CTV","anchor":"acr-automatic-content-recognition-data"},{"title":"Household-Level vs. Device-Level Targeting","snippet":"CTV usually targets a whole household (one TV, several possible viewers), not one specific device or person — which limits how precise the targeting and...","page":"ctv.html","pageLabel":"CTV","anchor":"household-level-vs-device-level-targeting"},{"title":"VOD (Video on Demand)","snippet":"Content you choose to watch whenever you want, instead of at a scheduled time.","page":"ctv.html","pageLabel":"CTV","anchor":"vod-video-on-demand"},{"title":"Live vs. On-Demand Inventory","snippet":"Ad space during a live event (a game, an awards show) is priced and sold differently than ad space in on-demand shows and movies.","page":"ctv.html","pageLabel":"CTV","anchor":"live-vs-on-demand-inventory"},{"title":"Publisher-Direct vs. Programmatic CTV","snippet":"You can buy CTV ad space directly from a specific streaming app, or buy it programmatically alongside the rest of your digital plan. Each publisher-direct...","page":"ctv.html","pageLabel":"CTV","anchor":"publisher-direct-vs-programmatic-ctv"},{"title":"FCC Rules Don't Apply Here","snippet":"CTV and streaming are internet-delivered, so they fall outside the FCC's broadcast rules — no \"lowest unit rate\" pricing window, no equal-opportunity...","page":"ctv.html","pageLabel":"CTV","anchor":"fcc-rules-don-t-apply-here"},{"title":"Why is CTV buying different from traditional TV buying?","snippet":"CTV gives you TV's reach and creative impact, combined with digital's targeting and reporting detail. But it also inherits some real TV-sized headaches —...","page":"ctv.html","pageLabel":"CTV","anchor":"ctv-vs-linear"},{"title":"TrueView","snippet":"YouTube's original skippable ad format — you only pay if someone watches long enough, or clicks on it.","page":"youtube.html","pageLabel":"YouTube","anchor":"trueview"},{"title":"Skippable vs. Non-Skippable Ads","snippet":"Skippable ads let a viewer skip after 5 seconds, and you only pay if they don't. Non-skippable ads have to be watched in full, and are usually priced on a...","page":"youtube.html","pageLabel":"YouTube","anchor":"skippable-vs-non-skippable-ads"},{"title":"Bumper Ads","snippet":"Very short (6-second) ads that can't be skipped — built for getting your brand noticed quickly, not for telling a long story.","page":"youtube.html","pageLabel":"YouTube","anchor":"bumper-ads"},{"title":"Content Targeting vs. Audience Targeting","snippet":"Content targeting picks which videos your ad runs on; audience targeting picks which people see it, no matter what they're watching. YouTube runs through...","page":"youtube.html","pageLabel":"YouTube","anchor":"content-targeting-vs-audience-targeting"},{"title":"Overview of YouTube ad formats","snippet":"A quick rundown of the main options — skippable in-stream, non-skippable in-stream, bumper, and in-feed ads — each suited to a different goal. Which one is...","page":"youtube.html","pageLabel":"YouTube","anchor":"youtube-formats"},{"title":"YouTube brand safety controls, explained","snippet":"What YouTube's built-in safety settings (like content exclusions) actually do, explained simply.","page":"youtube.html","pageLabel":"YouTube","anchor":"youtube-brand-safety"},{"title":"Account Structure","snippet":"Most platforms organize things in layers. On Meta, it's Campaign → Ad Set → Ad. On X and Snapchat, it's a similar Campaign → Ad Group/Set → Ad pattern....","page":"social.html","pageLabel":"Social","anchor":"account-structure"},{"title":"\"Paid For By\" Disclaimer","snippet":"A required, verified statement naming who's responsible for the ad — standard across Meta, X, and Snapchat for political ads. The exact wording and format...","page":"social.html","pageLabel":"Social","anchor":"paid-for-by-disclaimer"},{"title":"Ad Transparency Library","snippet":"Most platforms that allow political ads publish them (and often, the amount spent) in a public, searchable library — Meta's is the most complete and keeps...","page":"social.html","pageLabel":"Social","anchor":"ad-transparency-library"},{"title":"Pre-Election Blackout Window","snippet":"Some platforms (Meta, notably) stop accepting brand-new political ads in the final stretch before an election, though already-running ads can often keep...","page":"social.html","pageLabel":"Social","anchor":"pre-election-blackout-window"},{"title":"Pixel / Conversions API","snippet":"The Pixel is a small piece of code that tracks what visitors do on your website — a donation page or volunteer sign-up form, for instance. The Conversions...","page":"social.html","pageLabel":"Social","anchor":"pixel-conversions-api"},{"title":"Custom Audience vs. Lookalike Audience","snippet":"A custom audience is built from your own data — a voter file, a donor list, past site visitors. A lookalike audience is normally a new group a platform...","page":"social.html","pageLabel":"Social","anchor":"custom-audience-vs-lookalike-audience"},{"title":"Boosted Post vs. Paid Ad","snippet":"\"Boosting\" promotes an existing post with a few simplified settings. For political ads, this generally isn't the right path — the authorization, disclaimer,...","page":"social.html","pageLabel":"Social","anchor":"boosted-post-vs-paid-ad"},{"title":"Algorithm-Driven Optimization (e.g., Advantage+)","snippet":"Once an ad is flagged as political, platforms typically strip away some of this automation rather than lean into it — targeting gets locked to broader...","page":"social.html","pageLabel":"Social","anchor":"algorithm-driven-optimization-e-g-advantage"},{"title":"AI-Generated Creative Disclosure","snippet":"If creative was made or edited using generative AI, several platforms now require that to be disclosed — sometimes as a self-reported tag, sometimes...","page":"social.html","pageLabel":"Social","anchor":"ai-generated-creative-disclosure"},{"title":"Basic Creative Specs","snippet":"Every platform has its own rules for image size, video length, and text limits — and they change from time to time. Always check current requirements before...","page":"social.html","pageLabel":"Social","anchor":"basic-creative-specs"},{"title":"How to get verified and authorized for political ads on Meta","snippet":"Beyond standard Business Manager verification, political and social-issue advertisers need a separate authorization: confirming identity and US residency,...","page":"social.html","pageLabel":"Social","anchor":"meta-verification"},{"title":"How to set up a Meta Business Manager","snippet":"Create the account at business.facebook.com, add your Page(s) and ad account(s), then assign access to your team. Political ad authorization gets layered on...","page":"social.html","pageLabel":"Social","anchor":"meta-business-manager"},{"title":"How to install the Meta Pixel / Conversions API","snippet":"In simple terms: the Pixel is code added to your website (often through a tag manager) that fires when someone takes a key action, like submitting a...","page":"social.html","pageLabel":"Social","anchor":"meta-pixel"},{"title":"How to get certified for political ads on X","snippet":"X requires advertisers to apply for certification before running political or issue ads — a process that verifies identity and, in the US, confirms you're...","page":"social.html","pageLabel":"Social","anchor":"x-certification"},{"title":"How to get certified for political ads on Snapchat","snippet":"Snap runs its own political-advertiser intake process, and expects ads to carry a clear \"Paid for by\" disclosure. Snap also asks for a more measured tone...","page":"social.html","pageLabel":"Social","anchor":"snapchat-certification"},{"title":"Election Ads Verification","snippet":"A separate, additional verification Google requires before an advertiser can run ads featuring a candidate or officeholder — distinct from general account...","page":"search.html","pageLabel":"Search","anchor":"election-ads-verification-2"},{"title":"Restricted Targeting for Election Ads","snippet":"Once an ad falls under Google's election ads policy, targeting options narrow considerably: geographic location and contextual signals (placements, topics,...","page":"search.html","pageLabel":"Search","anchor":"restricted-targeting-for-election-ads"},{"title":"Account Structure (Campaign → Ad Group → Keyword)","snippet":"Campaigns hold your overall budget and goal. Ad groups organize things by theme. Keywords and the actual ads live inside each ad group.","page":"search.html","pageLabel":"Search","anchor":"account-structure-campaign-ad-group-keyword"},{"title":"Quality Score","snippet":"Google's own 1–10 rating of how relevant your ad is, how likely people are to click it, and how good the page it links to is. A higher score can mean a...","page":"search.html","pageLabel":"Search","anchor":"quality-score"},{"title":"Match Types","snippet":"\"Broad match\" shows your ad for a wide, loosely related range of searches. \"Phrase match\" needs the core meaning of your phrase present. \"Exact match\" needs...","page":"search.html","pageLabel":"Search","anchor":"match-types"},{"title":"Search Network vs. Display Network","snippet":"Search ads appear on the results page when someone actually searches for something. Display ads appear on a network of partner websites and apps based on...","page":"search.html","pageLabel":"Search","anchor":"search-network-vs-display-network"},{"title":"Performance Max (PMax)","snippet":"One campaign that automatically runs ads across Search, Display, YouTube, Gmail, and Maps using audience signals to steer delivery. Because it leans so...","page":"search.html","pageLabel":"Search","anchor":"performance-max-pmax"},{"title":"Smart Bidding","snippet":"Google's automated bidding strategies, which use machine learning to adjust how much you bid in real time, based on how likely each opportunity is to...","page":"search.html","pageLabel":"Search","anchor":"smart-bidding"},{"title":"SERP (Search Engine Results Page)","snippet":"The page you land on after typing a search — where the regular (\"organic\") results and the paid ads both show up.","page":"search.html","pageLabel":"Search","anchor":"serp-search-engine-results-page"},{"title":"Ad Rank","snippet":"The formula that decides where your ad shows up on the page — or whether it shows up at all — combining your bid, your Quality Score, and how well your ad...","page":"search.html","pageLabel":"Search","anchor":"ad-rank"},{"title":"Negative Keywords","snippet":"Search terms you specifically block your ad from showing up for, to keep out traffic that isn't actually relevant to you.","page":"search.html","pageLabel":"Search","anchor":"negative-keywords"},{"title":"Google Ads account structure, explained","snippet":"Walks through the campaign → ad group → keyword setup, and why keeping keyword groups tightly themed tends to help both Quality Score and results.","page":"search.html","pageLabel":"Search","anchor":"google-ads-structure"},{"title":"Conversion tracking, conceptually","snippet":"The basic idea: you tag the action that actually matters to you — a donation, a volunteer sign-up, an email capture — so the platform can measure it....","page":"search.html","pageLabel":"Search","anchor":"conversion-tracking"},{"title":"Applying for Election Ads verification","snippet":"Done through your Google Ads account, using the same payment-profile information tied to your account. Changing that payment profile later (a new legal...","page":"search.html","pageLabel":"Search","anchor":"election-ads-verification"},{"title":"Spend vs. Delivery/Pacing","snippet":"\"Spend\" is the money that's actually gone out the door so far. \"Pacing\" tells you whether that spend is on track, running ahead, or falling behind the...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"spend-vs-delivery-pacing"},{"title":"WoW / MoM / YoY","snippet":"Week-over-week, month-over-month, year-over-year — shorthand for comparing a number to the same period right before it.","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"wow-mom-yoy"},{"title":"Benchmark vs. Index","snippet":"A benchmark is a reference point — like the average click rate across an industry. An index shows how you compare to it: an index of 120 means you're 20%...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"benchmark-vs-index"},{"title":"Data Lag & Attribution Windows","snippet":"Numbers aren't final the second they post — a conversion can still get credited to a campaign for days afterward. That's why the most recent few days of...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"data-lag-attribution-windows"},{"title":"Viewability Rate (in a report)","snippet":"The share of your ads that actually had a real chance of being seen (see Viewability, on the Ad Basics page). A quality check on your delivery, not a...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"viewability-rate-in-a-report"},{"title":"Brand Lift Study","snippet":"A structured, survey-based study — often run directly through the ad platform — measuring whether a campaign actually moved the needle on awareness or how...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"brand-lift-study"},{"title":"Incrementality Test","snippet":"A test built to isolate what your campaign actually caused, separate from what would've happened anyway — usually done by holding a group of people back...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"incrementality-test"},{"title":"\"Optimization\" (as a report note)","snippet":"When you see this in a report, it usually just means someone made a deliberate change — to targeting, budget, bids, or creative — based on what the data was...","page":"measurement.html","pageLabel":"Reports & Metrics","anchor":"optimization-as-a-report-note"},{"title":"Start Here","snippet":"A suggested reading order for someone new to digital media buying and political advertising.","page":"start-here.html","pageLabel":"Start Here","anchor":null},{"title":"Launch Checklist","snippet":"Everything that needs to be in place before a campaign goes live — accounts, tracking, creative, budget, final checks.","page":"checklist.html","pageLabel":"Launch Checklist","anchor":null},{"title":"Cool Digital Ideas","snippet":"Ad formats and platform features worth knowing about — interactive CTV, vertical video, geofenced rally ads, AI-generated creative disclosure.","page":"ideas.html","pageLabel":"Cool Digital Ideas","anchor":null},{"title":"Request A Media Plan","snippet":"An intake form for budget, flight dates, and audience tracks — a real strategist builds the plan from it.","page":"media-plan-request.html","pageLabel":"Request A Media Plan","anchor":null},{"title":"Talk To A Strategist","snippet":"Reach a real person for anything strategic, account-specific, or beyond what the wiki covers.","page":"contact.html","pageLabel":"Talk To A Strategist","anchor":null},{"title":"All Topics","snippet":"The full directory of every wiki topic and guide.","page":"wiki.html","pageLabel":"All Topics","anchor":null},{"title":"Which platforms even allow political ads?","snippet":"Currently: Meta, Google (Search/Display/YouTube), X, and Snapchat. TikTok, LinkedIn, Pinterest, and Microsoft/Bing all prohibit political advertising...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-which-platforms-even-allow-political-ads"},{"title":"What's a \"Paid for by\" disclaimer, and do we need one?","snippet":"It's a required statement on the ad itself naming who's responsible for it — standard across every platform that allows political ads. The exact wording...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-what-s-a-paid-for-by-disclaimer-and-do-we-need-one"},{"title":"How long does it take to launch a campaign?","snippet":"Longer than a standard commercial campaign, mainly because of verification: political/election ad authorization on each platform (and often each DSP) can...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-how-long-does-it-take-to-launch-a-campaign"},{"title":"What do you need from us to get started?","snippet":"Generally: access to (or help creating) your ad accounts, the information needed for political advertiser verification, approved creative with disclaimer...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-what-do-you-need-from-us-to-get-started"},{"title":"How often will we get reports, and what's in them?","snippet":"Cadence is usually weekly or monthly, depending on the campaign — confirm with your Punch contact. Reports typically cover spend and pacing, key performance...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-how-often-will-we-get-reports-and-what-s-in-them"},{"title":"Who's our point of contact once we're live?","snippet":"Your dedicated Punch contact stays your main point of contact throughout — for questions, changes, and reporting.","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-who-s-our-point-of-contact-once-we-re-live"},{"title":"Can we make changes after a campaign launches?","snippet":"Yes — campaigns are actively managed and adjusted based on performance. Bigger changes (budget, timeline, audience, creative) should go through your Punch...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-can-we-make-changes-after-a-campaign-launches"},{"title":"Is there a blackout period before an election?","snippet":"On some platforms, yes — Meta, for instance, stops accepting brand-new political ads in the final week before an election, though ads already running can...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-is-there-a-blackout-period-before-an-election"},{"title":"What if we need to pause or end a campaign early?","snippet":"Usually possible, though notice periods and any minimum commitments depend on your specific agreement. Check with your Punch contact or your contract for...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-what-if-we-need-to-pause-or-end-a-campaign-early"},{"title":"Do we need a long-term contract?","snippet":"Political engagements are often naturally tied to an election cycle rather than open-ended, so this looks different than a typical commercial retainer. Ask...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-do-we-need-a-long-term-contract"},{"title":"How is budget or billing typically structured?","snippet":"Agencies commonly work on some combination of media spend plus a management fee, or a flat retainer — the right structure depends on your goals and budget....","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-how-is-budget-or-billing-typically-structured"},{"title":"Do you handle creative, or do we need our own?","snippet":"Depends on the engagement — some clients bring their own creative, others want support building it. Worth a direct conversation with your Punch contact...","page":"faq.html","pageLabel":"Process FAQ","anchor":"faq-do-you-handle-creative-or-do-we-need-our-own"}];
 
-  function normalize(s){ return s.toLowerCase().trim(); }
-  function wordsOf(s){ return normalize(s).split(/[^a-z0-9+]+/).filter(Boolean); }
-
-  function scorePage(query, page){
-    var q = normalize(query);
-    var qWords = wordsOf(query);
-    var score = 0;
-    page.keywords.forEach(function(kw){
-      var k = normalize(kw);
-      if(k.indexOf(' ') !== -1){
-        if(q.indexOf(k) !== -1) score += 2;
-      } else if(qWords.indexOf(k) !== -1){
-        score += 1;
-      } else if(qWords.some(function(w){ return w.length > 3 && (w.indexOf(k) === 0 || k.indexOf(w) === 0); })){
-        score += 1;
-      }
-    });
-    return score;
-  }
-
-  function findBestPage(query){
-    var best = null, bestScore = 0;
-    PAGES.forEach(function(page){
-      var s = scorePage(query, page);
-      if(s > bestScore){ bestScore = s; best = page; }
-    });
-    return bestScore > 0 ? best : null;
-  }
+  var fuse = new Fuse(SEARCH_INDEX, {
+    keys: [
+      { name: 'title', weight: 0.65 },
+      { name: 'pageLabel', weight: 0.25 },
+      { name: 'snippet', weight: 0.10 }
+    ],
+    threshold: 0.42,
+    ignoreLocation: true,
+    minMatchCharLength: 2,
+    useExtendedSearch: true
+  });
 
   var form = document.querySelector('.search-form');
   var input = document.getElementById('help-search');
+  var dropdown = document.getElementById('search-suggestions');
   var fallback = document.getElementById('search-fallback');
   var strategistLink = document.getElementById('search-fallback-link');
 
-  input.addEventListener('input', function(){
+  var currentResults = [];
+  var activeIndex = -1;
+
+  function hrefFor(record){
+    return record.anchor ? (record.page + '#' + record.anchor) : record.page;
+  }
+
+  function renderResults(results){
+    currentResults = results;
+    activeIndex = -1;
+    if(!results.length){
+      dropdown.classList.remove('visible');
+      dropdown.innerHTML = '';
+      return;
+    }
+    dropdown.innerHTML = results.slice(0, 8).map(function(r, i){
+      var item = r.item;
+      return '<a href="' + hrefFor(item) + '" data-index="' + i + '">' +
+        '<span class="s-title">' + item.title + '</span>' +
+        '<span class="s-page">' + item.pageLabel + '</span>' +
+        '<span class="s-snippet">' + item.snippet + '</span>' +
+        '</a>';
+    }).join('');
+    dropdown.classList.add('visible');
+  }
+
+  var STOPWORDS = ['a','an','the','is','are','was','were','do','does','did','how','what','when','where','why','who',
+    'which','i','you','we','they','it','he','she','my','your','our','their','his','her','me','us','him','them',
+    'to','of','for','on','in','at','with','by','from','as','into','onto','than','then',
+    'and','or','but','so','if','because',
+    'can','could','should','would','will','shall','may','might','must',
+    'get','got','getting','tell','tells','told','let','know','knows','want','wants','need','needs',
+    'be','been','being','am','have','has','had','having',
+    'this','that','these','those','there','here',
+    'about','more','some','any','please','just','also','really','actually','basically','exactly'];
+
+  function buildSearchPattern(query){
+    var words = query.toLowerCase().split(/\s+/).filter(Boolean);
+    var meaningful = words.filter(function(w){ return STOPWORDS.indexOf(w) === -1; });
+    if(!meaningful.length) meaningful = words; // if query was all stopwords, fall back to using everything
+    return meaningful.join(' ');
+  }
+
+  function runSearch(query){
     fallback.classList.remove('visible');
+    if(!query){
+      dropdown.classList.remove('visible');
+      currentResults = [];
+      return;
+    }
+    var results = fuse.search(buildSearchPattern(query));
+    renderResults(results);
+  }
+
+  input.addEventListener('input', function(){
+    runSearch(input.value.trim());
+  });
+
+  input.addEventListener('keydown', function(e){
+    var items = dropdown.querySelectorAll('a');
+    if(!items.length) return;
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, items.length - 1);
+      items.forEach(function(el, i){ el.classList.toggle('active', i === activeIndex); });
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      items.forEach(function(el, i){ el.classList.toggle('active', i === activeIndex); });
+    } else if(e.key === 'Escape'){
+      dropdown.classList.remove('visible');
+    }
+  });
+
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.search-wrap')){
+      dropdown.classList.remove('visible');
+    }
   });
 
   form.addEventListener('submit', function(e){
     var query = input.value.trim();
     if(!query) return; // empty search just falls through to the wiki hub
     e.preventDefault();
-    var match = findBestPage(query);
-    if(match){
-      window.location.href = match.file;
-    } else {
-      strategistLink.href = 'contact.html?q=' + encodeURIComponent(query);
-      fallback.classList.add('visible');
+
+    var activeItem = dropdown.querySelector('a.active') || dropdown.querySelector('a');
+    if(activeItem){
+      window.location.href = activeItem.getAttribute('href');
+      return;
     }
+    if(currentResults.length){
+      window.location.href = hrefFor(currentResults[0].item);
+      return;
+    }
+    strategistLink.href = 'contact.html?q=' + encodeURIComponent(query);
+    fallback.classList.add('visible');
+    dropdown.classList.remove('visible');
   });
 })();
 </script>
