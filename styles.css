@@ -204,12 +204,6 @@ hr.rule{
   text-align: left;
 }
 
-.last-reviewed{
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  margin-top: 10px;
-}
-
 @media print{
   .site-header{ position: static; background: #fff !important; border-bottom: 2px solid #000; box-shadow: none; }
   .brand{ color: #000; }
