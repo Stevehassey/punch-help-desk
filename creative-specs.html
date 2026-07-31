@@ -43,13 +43,13 @@
 <tr><th>Spec</th><th>Detail</th></tr>
 <tr><td>Aspect ratio</td><td>16:9 (horizontal)</td></tr>
 <tr><td>Resolution</td><td>1920×1080 recommended (1280×720 minimum)</td></tr>
-<tr><td>Duration</td><td>Skippable in-stream works at either :15 or :30, with a skip button appearing at 5 seconds. Non-skippable in-stream is generally capped at :15–:20 in the standard auction tier; a longer non-skippable option, up to :60, is also available specifically on YouTube TV/reach-focused buys and must match the booked duration to serve.</td></tr>
+<tr><td>Duration</td><td>Skippable in-stream covers :15, :30, and :60, with a skip button appearing at 5 seconds. Non-skippable in-stream is generally capped at :15–:20 in the standard auction tier, with a separate longer non-skippable tier available on YouTube TV/reach-focused buys.</td></tr>
 <tr><td>File format</td><td>MP4 (H.264) recommended; MOV and AVI are also accepted</td></tr>
 <tr><td>Max file size</td><td>Very generous (Google states up to 256 GB) — not a practical constraint for typical creative</td></tr>
 <tr><td>Audio</td><td>AAC or MP3, 44.1 kHz or higher</td></tr>
 </table>
 <p class="platform-note">Which duration and format (skippable vs. non-skippable, in-stream vs. YouTube TV) is right depends on the plan; confirm with your Punch contact before production.</p>
-<p class="platform-note">Having a YouTube channel for the candidate or organization is worth setting up if one doesn't already exist: linking the ad to that channel gives viewers somewhere to land beyond the ad itself.</p>
+<p class="platform-note">Best practice for handing off the asset: share an unlisted YouTube link for the ad with your Punch contact rather than a raw file. If that's not possible, a file works too.</p>
 </div>
 
 <div class="platform-section" id="meta-specs">
@@ -59,7 +59,7 @@
 <p class="subhead">Newsfeed</p>
 <table class="spec-table">
 <tr><th>Spec</th><th>Detail</th></tr>
-<tr><td>Aspect ratio</td><td>4:5 is our default recommendation for feed: it takes up more of the screen than a square 1:1 crop. 1:1 is the safer universal fallback if a placement doesn't support 4:5.</td></tr>
+<tr><td>Aspect ratio</td><td>4:5 is our default recommendation for feed: it takes up more of the screen than a square 1:1 crop. 1:1 can also work.</td></tr>
 <tr><td>Resolution</td><td>1080×1350 (4:5) or 1080×1080 (1:1)</td></tr>
 <tr><td>File format</td><td>MP4 or MOV (H.264)</td></tr>
 <tr><td>Max file size</td><td>Up to 4 GB, though keeping well under 1 GB is recommended for smoother delivery</td></tr>
@@ -93,19 +93,19 @@
 </div>
 
 <div class="platform-section" id="freewheel-specs">
-<h2>Programmatic: Freewheel</h2>
+<h2>Programmatic: Beeswax (FreeWheel)</h2>
 <p class="platform-section__sub">Horizontal 16:9, :15 and :30</p>
-<p class="platform-note">Freewheel isn't one platform with a single fixed spec sheet: it's the ad-serving layer behind many premium streaming publishers (Hulu, NBCUniversal/Peacock, and others), and actual bitrate and file requirements can vary a lot by which specific publisher the buy is running on. Treat the numbers below as a starting point, not a final spec.</p>
+<p class="platform-note">Beeswax is the actual DSP we traffic through; FreeWheel is the premium CTV/video supply it connects to (Hulu, NBCUniversal, ESPN, Roku, Netflix, and other premium publishers). Because that inventory is bought publisher-by-publisher, the bitrate, resolution, and duration options that actually matter are set by each individual publisher, not by Beeswax itself. The table below shows how much that can vary.</p>
+<div class="spec-table-wrap">
 <table class="spec-table">
-<tr><th>Spec</th><th>Detail</th></tr>
-<tr><td>Aspect ratio</td><td>16:9</td></tr>
-<tr><td>Resolution</td><td>1920×1080</td></tr>
-<tr><td>Duration</td><td>:15 and :30</td></tr>
-<tr><td>File format</td><td>MP4 (H.264)</td></tr>
-<tr><td>Bitrate</td><td>Varies significantly by publisher: commonly 1,200–1,500 kbps minimum, though some premium publishers require much higher (Hulu-hosted inventory, for example, has required upward of 15,000 kbps)</td></tr>
-<tr><td>Max file size</td><td>No single fixed cap: generally calculated from duration × bitrate rather than a flat limit</td></tr>
+<tr><th>Publisher</th><th>Bitrate</th><th>Resolution</th><th>Duration</th></tr>
+<tr><td>Hulu</td><td>15,000–30,000 kbps</td><td>960×720 up to 1920×1080</td><td>:15 or :30</td></tr>
+<tr><td>NBCUniversal</td><td>15,000–30,000 kbps</td><td>1920×1080</td><td>:06, :15, :30, :45, or :60</td></tr>
+<tr><td>ESPN</td><td>2,000 kbps minimum</td><td>1280×720 or 1920×1080</td><td>:15 or :30</td></tr>
+<tr><td>Roku</td><td>2,100 kbps minimum</td><td>No fixed resolution</td><td>6–60 seconds</td></tr>
 </table>
-<p class="platform-note">Confirm exact bitrate and file requirements with your Punch contact for the specific publisher(s) in the plan before sending a file to production.</p>
+</div>
+<p class="platform-note">For planning purposes, 16:9 at 1920×1080, MP4 (H.264), in :15 or :30, is a safe baseline to produce to. Confirm exact bitrate and resolution with your Punch contact once the specific publisher(s) in the plan are known; a lower-bitrate cut that looks fine on one publisher may get rejected or downgraded on another.</p>
 </div>
 
 <div class="cta-card">
