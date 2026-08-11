@@ -481,6 +481,20 @@
     return meaningful.join(' ');
   }
 
+  function isWholeWordPrefixMatch(title, q){
+    if(title.indexOf(q) !== 0) return false;
+    var nextChar = title.charAt(q.length);
+    return nextChar === '' || /[^a-z0-9]/i.test(nextChar);
+  }
+
+  function boostExactMatches(results, rawQuery){
+    var q = rawQuery.trim().toLowerCase();
+    if(!q) return results;
+    var boosted = results.filter(function(r){ return isWholeWordPrefixMatch((r.item.title||'').toLowerCase(), q); });
+    var rest = results.filter(function(r){ return !isWholeWordPrefixMatch((r.item.title||'').toLowerCase(), q); });
+    return boosted.concat(rest);
+  }
+
   function runSearch(query){
     fallback.classList.remove('visible');
     if(!query){
@@ -489,6 +503,7 @@
       return;
     }
     var results = fuse.search(buildSearchPattern(query));
+    results = boostExactMatches(results, query);
     renderResults(results);
   }
 
